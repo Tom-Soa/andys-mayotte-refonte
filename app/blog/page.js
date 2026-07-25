@@ -29,7 +29,7 @@ export default async function BlogPage() {
         }} />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <span className="section-label" style={{ color: 'rgba(201,161,74,0.85)' }}>Actualités</span>
+          <span className="section-label on-dark">Actualités</span>
           <h1 className="font-serif font-semibold text-white mb-2 leading-tight"
               style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}>
             Actualités &amp; Promos

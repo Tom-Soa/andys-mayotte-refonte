@@ -66,7 +66,7 @@ export default function ProduitsPage() {
         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white/5 to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <span className="section-label" style={{ color: 'rgba(201,161,74,0.85)' }}>Catalogue</span>
+          <span className="section-label on-dark">Catalogue</span>
           <h1 className="font-serif font-semibold text-white mb-2 leading-tight"
               style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}>
             Nos produits
@@ -161,12 +161,12 @@ export default function ProduitsPage() {
               {search && ` pour "${search}"`}
             </p>
             <div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6 items-stretch"
               role="list"
               aria-label="Catalogue produits"
             >
               {filtered.map(product => (
-                <div key={product.id} role="listitem">
+                <div key={product.id} role="listitem" className="h-full">
                   <ProductCard product={product} />
                 </div>
               ))}

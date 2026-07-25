@@ -34,7 +34,7 @@ export default function PanierPage() {
       {/* ── En-tête ───────────────────────────────────────────── */}
       <div className="bg-primary-900 text-white px-4 py-10">
         <div className="max-w-5xl mx-auto">
-          <span className="section-label" style={{ color: 'rgba(201,161,74,0.85)' }}>Ma commande</span>
+          <span className="section-label on-dark">Ma commande</span>
           <div className="flex items-end justify-between">
             <h1 className="font-serif font-semibold text-white leading-tight" style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)' }}>
               Mon panier

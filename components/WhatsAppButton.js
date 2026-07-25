@@ -18,7 +18,7 @@ export default function WhatsAppButton() {
       aria-label="Nous contacter sur WhatsApp"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 group"
+      className="fixed bottom-6 right-6 z-50 hidden md:flex items-center justify-center rounded-full shadow-lg transition-all duration-200 group"
       style={{
         width: 56,
         height: 56,

@@ -143,7 +143,7 @@ export default function ReservationPage() {
           >
             <ArrowLeft size={14} /> Retour au panier
           </Link>
-          <span className="section-label" style={{ color: 'rgba(201,161,74,0.85)' }}>Finalisation</span>
+          <span className="section-label on-dark">Finalisation</span>
           <h1 className="font-serif font-semibold text-white leading-tight" style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)' }}>
             Réserver ma commande
           </h1>

@@ -86,6 +86,11 @@ export default async function ProductPage({ params }) {
     ? { label: 'En stock', cls: 'bg-emerald-50 text-emerald-700 border border-emerald-100' }
     : { label: 'Indisponible', cls: 'bg-stone-100 text-stone-500 border border-stone-200' }
 
+  /* Garde-fou : certains champs emoji contiennent du texte parasite */
+  const emoji = p.emoji && p.emoji.trim().length <= 4 ? p.emoji.trim() : null
+  const stockCount = Number(p.stock)
+  const hasStock = Number.isFinite(stockCount) && stockCount > 0
+
   return (
     <div className="min-h-screen bg-white">
       <script
@@ -134,7 +139,7 @@ export default async function ProductPage({ params }) {
             className="font-serif font-semibold text-white leading-tight"
             style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)' }}
           >
-            {p.emoji && <span className="mr-2">{p.emoji}</span>}
+            {emoji && <span className="mr-2">{emoji}</span>}
             {p.name}
           </h1>
         </div>
@@ -161,8 +166,8 @@ export default async function ProductPage({ params }) {
                   className="w-full h-full flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg, #F0F7F4 0%, #F7F2E8 100%)' }}
                 >
-                  {p.emoji?.trim() ? (
-                    <span style={{ fontSize: '8rem', lineHeight: 1 }}>{p.emoji}</span>
+                  {emoji ? (
+                    <span style={{ fontSize: '8rem', lineHeight: 1 }}>{emoji}</span>
                   ) : (
                     <span className="text-8xl opacity-10">📦</span>
                   )}
@@ -203,7 +208,7 @@ export default async function ProductPage({ params }) {
               className="font-serif font-semibold text-primary-800 leading-tight mb-4"
               style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
             >
-              {p.emoji && <span className="mr-2">{p.emoji}</span>}
+              {emoji && <span className="mr-2">{emoji}</span>}
               {p.name}
             </h2>
 
@@ -235,6 +240,28 @@ export default async function ProductPage({ params }) {
 
             <div className="my-6 border-t border-stone-100" />
 
+            {/* Infos pratiques : conditionnement, stock, retrait */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+              {p.unit && (
+                <div className="rounded-xl border border-stone-100 bg-stone-50/60 px-4 py-3">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Conditionnement</p>
+                  <p className="text-sm font-semibold text-primary-800 capitalize">Vendu par {p.unit}</p>
+                </div>
+              )}
+              <div className="rounded-xl border border-stone-100 bg-stone-50/60 px-4 py-3">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Disponibilité</p>
+                <p className="text-sm font-semibold text-primary-800">
+                  {p.available
+                    ? hasStock ? `${stockCount} en stock` : 'En stock'
+                    : 'Indisponible'}
+                </p>
+              </div>
+              <div className="rounded-xl border border-stone-100 bg-stone-50/60 px-4 py-3">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Retrait</p>
+                <p className="text-sm font-semibold text-primary-800">Magasin de Poroani</p>
+              </div>
+            </div>
+
             {/* Bouton ajouter au panier */}
             <div className="flex flex-col sm:flex-row gap-3 items-start">
               <AddToCartButton product={p} />
@@ -265,9 +292,9 @@ export default async function ProductPage({ params }) {
                 Vous aimerez aussi
               </h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch">
               {relatedProducts.map((prod, i) => (
-                <div key={prod.id} className={`reveal delay-${Math.min(i + 1, 5)}`}>
+                <div key={prod.id} className={`reveal delay-${Math.min(i + 1, 5)} h-full`}>
                   <ProductCard product={prod} />
                 </div>
               ))}

@@ -84,7 +84,7 @@ export default async function HomePage() {
         {/* Image de fond */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1800&q=80')" }}
+          style={{ backgroundImage: "url('/images/site/hero.jpg')" }}
         />
         {/* Overlay principal */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(10,38,24,0.92) 0%, rgba(10,38,24,0.75) 55%, rgba(10,38,24,0.55) 100%)' }} />
@@ -189,19 +189,6 @@ export default async function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          MARQUEE STRIP
-      ══════════════════════════════════════════════════════════════ */}
-      <div className="bg-primary-500 overflow-hidden py-2.5 select-none" aria-hidden="true">
-        <div className="marquee-track">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <span key={i} className="px-6 text-white text-[11px] font-semibold tracking-[0.2em] uppercase whitespace-nowrap opacity-90">
-              Grossiste alimentaire&nbsp;&nbsp;·&nbsp;&nbsp;Poroani, Mayotte&nbsp;&nbsp;·&nbsp;&nbsp;Réservation en ligne&nbsp;&nbsp;·&nbsp;&nbsp;Retrait en magasin&nbsp;&nbsp;·&nbsp;&nbsp;Paiement sur place&nbsp;&nbsp;·
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════════════════════════
           COMMENT ÇA MARCHE
       ══════════════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-32" style={{ background: '#F7F2E8' }}>
@@ -221,22 +208,14 @@ export default async function HomePage() {
                  style={{ background: 'linear-gradient(90deg, rgba(201,161,74,0.3), rgba(201,161,74,0.6), rgba(201,161,74,0.3))' }} />
 
             {steps.map((item, idx) => (
-              <div key={item.step} className={`reveal delay-${idx + 1} relative z-10 flex flex-col items-center text-center px-4`}>
-                {/* Numéro décoratif */}
+              <div key={item.step} className={`reveal delay-${idx + 1} group relative z-10 flex flex-col items-center text-center px-4`}>
                 <div className="relative mb-5">
-                  <span
-                    className="absolute -top-5 left-1/2 -translate-x-1/2 font-serif font-bold select-none pointer-events-none leading-none"
-                    style={{ fontSize: '6rem', color: 'rgba(20,61,44,0.07)', lineHeight: 1 }}
-                    aria-hidden="true"
-                  >
-                    {item.step}
-                  </span>
-                  <div className="relative z-10 w-[4.5rem] h-[4.5rem] rounded-full bg-primary-900 text-primary-400 flex items-center justify-center shadow-forest ring-4"
+                  <div className="relative z-10 w-[4.5rem] h-[4.5rem] rounded-full bg-primary-900 text-primary-400 flex items-center justify-center ring-4 transition-transform duration-300 group-hover:-translate-y-1"
                        style={{ '--tw-ring-color': '#F7F2E8', boxShadow: '0 6px 24px rgba(10,38,24,0.28)' }}>
                     {item.icon}
                   </div>
                 </div>
-                <span className="text-primary-500 text-[10px] font-bold tracking-[0.2em] mb-1.5 uppercase">{item.step}</span>
+                <span className="text-primary-500 text-[10px] font-bold tracking-[0.2em] mb-1.5 uppercase">Étape {item.step}</span>
                 <h3 className="font-serif font-semibold text-primary-800 text-xl mb-2">{item.title}</h3>
                 <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
               </div>
@@ -252,7 +231,7 @@ export default async function HomePage() {
                 </div>
                 <div>
                   <div className="flex items-baseline gap-2 mb-0.5">
-                    <span className="text-primary-400 text-[10px] font-bold tracking-widest uppercase">{item.step}</span>
+                    <span className="text-primary-400 text-[10px] font-bold tracking-widest uppercase">Étape {item.step}</span>
                     <h3 className="font-serif font-semibold text-primary-800 text-lg leading-none">{item.title}</h3>
                   </div>
                   <p className="text-xs text-stone-500 leading-relaxed">{item.desc}</p>
@@ -268,32 +247,35 @@ export default async function HomePage() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="bg-white py-20 md:py-28 border-t border-stone-100">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="reveal flex items-end justify-between mb-10 md:mb-14">
-            <div>
-              <span className="section-label">Sélection du moment</span>
-              <h2 className="font-serif font-semibold text-primary-800 leading-tight"
-                  style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}>
-                Nos produits
-              </h2>
-            </div>
-            <Link
-              href="/produits"
-              className="inline-flex items-center gap-1.5 text-primary-600 hover:text-primary-800 font-medium text-sm transition-colors group"
-            >
-              <span className="hidden sm:inline">Tout le catalogue</span>
-              <span className="sm:hidden">Voir tout</span>
-              <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+          <div className="reveal text-center mb-10 md:mb-14">
+            <span className="section-label">Sélection du moment</span>
+            <h2 className="font-serif font-semibold text-primary-800 leading-tight"
+                style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}>
+              Nos produits
+            </h2>
           </div>
 
           {featuredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {featuredProducts.map((product, i) => (
-                <div key={product.id} className={`reveal delay-${Math.min(i + 1, 5)}`}>
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch">
+                {featuredProducts.map((product, i) => (
+                  <div key={product.id} className={`reveal delay-${Math.min(i + 1, 5)} h-full`}>
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Bouton vers le catalogue complet, sous la grille */}
+              <div className="reveal text-center mt-10 md:mt-14">
+                <Link
+                  href="/produits"
+                  className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-forest-800 active:scale-95 text-white font-semibold px-8 py-4 rounded-xl text-sm transition-all shadow-forest hover:-translate-y-0.5 group"
+                >
+                  Voir tout le catalogue
+                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </>
           ) : (
             <div className="text-center py-16 text-stone-400">
               <p className="font-serif text-xl text-primary-800 mb-2">Catalogue en cours de mise à jour</p>
@@ -314,7 +296,7 @@ export default async function HomePage() {
             <div className="reveal-left relative">
               <div className="relative rounded-2xl overflow-hidden shadow-forest" style={{ aspectRatio: '4/3' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80"
+                  src="/images/site/apropos.jpg"
                   alt="Entrepôt Chez Andy's"
                   className="w-full h-full object-cover"
                 />
@@ -336,7 +318,7 @@ export default async function HomePage() {
 
             {/* Texte */}
             <div className="reveal-right">
-              <span className="section-label" style={{ color: 'rgba(201,161,74,0.85)' }}>
+              <span className="section-label on-dark">
                 À propos
               </span>
               <h2
@@ -490,8 +472,8 @@ export default async function HomePage() {
       <section className="relative overflow-hidden py-20 md:py-32" style={{ background: '#F7F2E8' }}>
         {/* Image de fond très subtile */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-[0.06]"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=70')" }}
+          className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
+          style={{ backgroundImage: "url('/images/site/cta-bg.jpg')" }}
         />
         {/* Décoration or */}
         <div className="absolute top-0 left-0 right-0 h-px"

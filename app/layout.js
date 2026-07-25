@@ -1,6 +1,7 @@
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
 import Header from '@/components/Header'
+import TopBanner from '@/components/TopBanner'
 import Footer from '@/components/Footer'
 import RevealObserver from '@/components/RevealObserver'
 import CookieBanner from '@/components/CookieBanner'
@@ -102,6 +103,7 @@ export default function RootLayout({ children }) {
       <body className="flex flex-col min-h-screen">
         {/* CartProvider enveloppe toute l'app pour partager l'état du panier */}
         <CartProvider>
+          <TopBanner />
           <Header />
           <main className="flex-1 pb-nav md:pb-0">
             {children}

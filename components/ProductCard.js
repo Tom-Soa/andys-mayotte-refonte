@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { ShoppingCart, Plus, Minus, Check } from 'lucide-react'
 
@@ -21,10 +22,10 @@ export default function ProductCard({ product }) {
   const showImage = product.image && !imgError
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 flex flex-col border border-stone-100/80">
+    <div className="group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-stone-100/80">
 
-      {/* ── Visuel produit ─────────────────────────────────────── */}
-      <div className="relative overflow-hidden bg-cream-100 h-44">
+      {/* Visuel produit : cliquable vers la fiche */}
+      <Link href={`/produits/${product.id}`} className="relative block overflow-hidden bg-cream-100 h-44">
         {showImage ? (
           <img
             src={product.image}
@@ -63,9 +64,9 @@ export default function ProductCard({ product }) {
             </span>
           </div>
         )}
-      </div>
+      </Link>
 
-      {/* ── Infos produit ──────────────────────────────────────── */}
+      {/* Infos produit */}
       <div className="p-4 flex flex-col flex-1">
 
         {/* Catégorie */}
@@ -73,9 +74,11 @@ export default function ProductCard({ product }) {
           {product.category}
         </span>
 
-        <h3 className="font-semibold text-primary-800 text-sm leading-snug mb-1.5 line-clamp-2">
-          {product.name}
-        </h3>
+        <Link href={`/produits/${product.id}`} className="block">
+          <h3 className="font-semibold text-primary-800 text-sm leading-snug mb-1.5 line-clamp-2 group-hover:text-primary-600 transition-colors">
+            {product.name}
+          </h3>
+        </Link>
 
         <p className="text-xs text-stone-400 leading-relaxed flex-1 mb-4 line-clamp-2">
           {product.description}

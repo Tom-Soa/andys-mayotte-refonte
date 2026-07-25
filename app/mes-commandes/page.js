@@ -163,7 +163,7 @@ export default function MesCommandesPage() {
         }} />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4">
-          <span className="section-label" style={{ color: 'rgba(201,161,74,0.85)' }}>Espace client</span>
+          <span className="section-label on-dark">Espace client</span>
           <h1 className="font-serif font-semibold text-white mb-2 leading-tight"
               style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}>
             Mes commandes
