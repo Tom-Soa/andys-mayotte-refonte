@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import {
   ShoppingCart, Menu, X, Home, Package,
-  CalendarCheck, Phone, ArrowRight, Info, Mail, ReceiptText,
+  CalendarCheck, Phone, ArrowRight, Info, Mail, ReceiptText, HelpCircle,
 } from 'lucide-react'
 
 /* Icone WhatsApp (SVG officiel simplifie) */
@@ -43,8 +43,8 @@ export default function Header() {
     { href: '/',            label: 'Accueil' },
     { href: '/produits',    label: 'Catalogue' },
     { href: '/reservation', label: 'Réservation' },
-    { href: '/#apropos',    label: 'À propos' },
-    { href: '/#contact',    label: 'Contact' },
+    { href: '/a-propos',    label: 'À propos' },
+    { href: '/contact',     label: 'Contact' },
   ]
 
   const isActive = href =>
@@ -61,8 +61,9 @@ export default function Header() {
   /* Liens du menu mobile (bottom sheet) */
   const sheetLinks = [
     { href: '/reservation',  icon: <CalendarCheck size={17} />, label: 'Réserver un créneau', cta: true },
-    { href: '/#apropos',     icon: <Info size={17} />,          label: 'À propos' },
-    { href: '/#contact',     icon: <Mail size={17} />,          label: 'Contact' },
+    { href: '/a-propos',     icon: <Info size={17} />,          label: 'À propos' },
+    { href: '/contact',      icon: <Mail size={17} />,          label: 'Contact' },
+    { href: '/faq',          icon: <HelpCircle size={17} />,       label: 'FAQ' },
     { href: '/mes-commandes',icon: <ReceiptText size={17} />,   label: 'Mes commandes' },
   ]
 
@@ -135,7 +136,7 @@ export default function Header() {
             {/* Panier desktop */}
             <Link
               href="/panier"
-              className="hidden md:relative md:inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold text-sm px-4 py-2.5 rounded-xl transition-all shadow-gold"
+              className="hidden md:relative md:inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold text-sm px-4 py-2.5 rounded-md transition-all shadow-gold"
             >
               <ShoppingCart size={15} />
               Panier
@@ -149,7 +150,7 @@ export default function Header() {
             {/* Reserver : mobile top, compense la sortie du lien de la barre basse */}
             <Link
               href="/reservation"
-              className="md:hidden inline-flex items-center gap-1.5 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold text-xs px-3.5 py-2 rounded-full transition-all shadow-gold"
+              className="md:hidden inline-flex items-center gap-1.5 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold text-xs px-3.5 py-2 rounded-md transition-all shadow-gold"
             >
               <CalendarCheck size={13} />
               Réserver
@@ -172,7 +173,7 @@ export default function Header() {
         }`}
         style={{ bottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }}
       >
-        <div className="mx-3 mb-2 rounded-2xl bg-primary-900 border border-white/10 shadow-forest overflow-hidden">
+        <div className="mx-3 mb-2 rounded-md bg-primary-900 border border-white/10 shadow-forest overflow-hidden">
           <div className="flex items-center justify-between px-5 pt-4 pb-2">
             <span className="text-[10px] font-bold tracking-[0.22em] uppercase text-primary-400">Menu</span>
             <button
@@ -189,7 +190,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setSheetOpen(false)}
-                className={`flex items-center gap-3 px-3 py-3.5 rounded-xl text-sm transition-colors ${
+                className={`flex items-center gap-3 px-3 py-3.5 rounded-md text-sm transition-colors ${
                   link.cta
                     ? 'bg-primary-500 text-white font-semibold shadow-gold mb-1.5'
                     : 'text-stone-300 hover:text-white hover:bg-white/[0.06]'
@@ -205,7 +206,7 @@ export default function Header() {
       </div>
 
       {/* Barre de navigation mobile fixee en bas */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-primary-900/97 backdrop-blur-sm border-t border-white/10 safe-pb">
+      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-primary-900 border-t border-white/10 safe-pb shadow-[0_-4px_18px_rgba(6,23,16,0.45)]">
         <div className="grid grid-cols-5 h-16">
           {bottomNav.map(item => {
             const active = !item.external && isActive(item.href)

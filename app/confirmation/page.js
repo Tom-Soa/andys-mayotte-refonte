@@ -38,7 +38,7 @@ export default function ConfirmationPage() {
         </p>
         <Link
           href="/produits"
-          className="inline-flex items-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3.5 rounded-xl transition-all shadow-forest"
+          className="inline-flex items-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3.5 rounded-md transition-all shadow-forest"
         >
           <ShoppingBag size={17} />
           Voir les produits
@@ -76,12 +76,12 @@ export default function ConfirmationPage() {
       <div className="max-w-2xl mx-auto px-4 py-8 space-y-4">
 
         {/* ── Créneau de retrait ────────────────────────────────── */}
-        <div className="bg-primary-900 text-white rounded-2xl p-6 relative overflow-hidden shadow-forest">
+        <div className="bg-primary-900 text-white rounded-md p-6 relative overflow-hidden shadow-forest">
           <div className="absolute inset-0" style={{
             background: 'radial-gradient(ellipse 65% 75% at 8% 92%, rgba(201,161,74,0.16) 0%, transparent 60%)'
           }} />
           <div className="relative z-10 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-primary-500/20 border border-primary-500/30 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-md bg-primary-500/20 border border-primary-500/30 flex items-center justify-center shrink-0">
               <Clock size={18} className="text-primary-400" />
             </div>
             <div>
@@ -93,7 +93,7 @@ export default function ConfirmationPage() {
         </div>
 
         {/* ── Infos client ─────────────────────────────────────── */}
-        <div className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-6">
+        <div className="bg-white rounded-md shadow-card border border-stone-100/80 p-6">
           <h2 className="font-serif font-semibold text-primary-800 text-lg mb-4">Vos informations</h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -112,7 +112,7 @@ export default function ConfirmationPage() {
         </div>
 
         {/* ── Détail commande ──────────────────────────────────── */}
-        <div className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-6">
+        <div className="bg-white rounded-md shadow-card border border-stone-100/80 p-6">
           <h2 className="font-serif font-semibold text-primary-800 text-lg mb-4">Détail de la commande</h2>
           <div className="space-y-3 mb-4">
             {reservation.articles.map(item => (
@@ -135,7 +135,7 @@ export default function ConfirmationPage() {
             </span>
           </div>
           {reservation.note && (
-            <div className="mt-4 bg-stone-50 rounded-xl p-3.5 text-sm text-stone-600 border border-stone-100">
+            <div className="mt-4 bg-stone-50 rounded-md p-3.5 text-sm text-stone-600 border border-stone-100">
               <p className="text-[10px] text-stone-400 font-semibold uppercase tracking-widest mb-1">Note</p>
               {reservation.note}
             </div>
@@ -143,7 +143,7 @@ export default function ConfirmationPage() {
         </div>
 
         {/* ── Infos pratiques ──────────────────────────────────── */}
-        <div className="rounded-2xl p-6 border" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.25)' }}>
+        <div className="rounded-md p-6 border" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.25)' }}>
           <h2 className="font-semibold text-primary-800 mb-4 text-sm uppercase tracking-widest flex items-center gap-2">
             <span className="w-1 h-4 bg-primary-500 rounded-full" />
             À savoir pour le retrait
@@ -177,14 +177,14 @@ export default function ConfirmationPage() {
         <div className="flex flex-col sm:flex-row gap-3 pt-2 pb-4">
           <Link
             href="/"
-            className="flex-1 flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold py-3.5 rounded-xl transition-all shadow-forest"
+            className="flex-1 flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold py-3.5 rounded-md transition-all shadow-forest"
           >
             <Home size={16} />
             Retour à l&apos;accueil
           </Link>
           <Link
             href="/produits"
-            className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-stone-50 active:scale-95 text-primary-800 font-semibold py-3.5 rounded-xl transition-all border border-stone-200 shadow-card"
+            className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-stone-50 active:scale-95 text-primary-800 font-semibold py-3.5 rounded-md transition-all border border-stone-200 shadow-card"
           >
             <ShoppingBag size={16} />
             Nouvelle commande

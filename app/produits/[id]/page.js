@@ -152,7 +152,7 @@ export default async function ProductPage({ params }) {
           {/* ── Colonne image ──────────────────────────────────── */}
           <div className="relative">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-card border border-stone-100"
+              className="relative rounded-md overflow-hidden shadow-card border border-stone-100"
               style={{ aspectRatio: '4/3' }}
             >
               {p.image ? (
@@ -243,12 +243,12 @@ export default async function ProductPage({ params }) {
             {/* Infos pratiques : conditionnement, stock, retrait */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
               {p.unit && (
-                <div className="rounded-xl border border-stone-100 bg-stone-50/60 px-4 py-3">
+                <div className="rounded-md border border-stone-100 bg-stone-50/60 px-4 py-3">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Conditionnement</p>
                   <p className="text-sm font-semibold text-primary-800 capitalize">Vendu par {p.unit}</p>
                 </div>
               )}
-              <div className="rounded-xl border border-stone-100 bg-stone-50/60 px-4 py-3">
+              <div className="rounded-md border border-stone-100 bg-stone-50/60 px-4 py-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Disponibilité</p>
                 <p className="text-sm font-semibold text-primary-800">
                   {p.available
@@ -256,7 +256,7 @@ export default async function ProductPage({ params }) {
                     : 'Indisponible'}
                 </p>
               </div>
-              <div className="rounded-xl border border-stone-100 bg-stone-50/60 px-4 py-3">
+              <div className="rounded-md border border-stone-100 bg-stone-50/60 px-4 py-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Retrait</p>
                 <p className="text-sm font-semibold text-primary-800">Magasin de Poroani</p>
               </div>
@@ -267,7 +267,7 @@ export default async function ProductPage({ params }) {
               <AddToCartButton product={p} />
               <Link
                 href="/reservation"
-                className="inline-flex items-center justify-center gap-2 border-2 border-primary-800/60 text-primary-800 hover:bg-primary-800 hover:text-white font-semibold px-6 py-4 rounded-xl text-sm transition-all active:scale-95"
+                className="inline-flex items-center justify-center gap-2 border-2 border-primary-800/60 text-primary-800 hover:bg-primary-800 hover:text-white font-semibold px-6 py-4 rounded-md text-sm transition-all active:scale-95"
               >
                 Réserver un créneau
               </Link>

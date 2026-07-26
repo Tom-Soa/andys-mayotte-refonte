@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
   const showImage = product.image && !imgError
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-stone-100/80">
+    <div className="group bg-white rounded-md overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-stone-100/80">
 
       {/* Visuel produit : cliquable vers la fiche */}
       <Link href={`/produits/${product.id}`} className="relative block overflow-hidden bg-cream-100 h-44">
@@ -104,7 +104,7 @@ export default function ProductCard({ product }) {
           quantity === 0 ? (
             <button
               onClick={handleAdd}
-              className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+              className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-semibold transition-all duration-200 ${
                 added
                   ? 'bg-emerald-500 text-white scale-[0.98]'
                   : 'bg-primary-900 hover:bg-primary-800 text-white hover:scale-[1.01] active:scale-95'
@@ -117,7 +117,7 @@ export default function ProductCard({ product }) {
               )}
             </button>
           ) : (
-            <div className="flex items-center justify-between bg-primary-50 rounded-xl p-1 border border-primary-100">
+            <div className="flex items-center justify-between bg-primary-50 rounded-md p-1 border border-primary-100">
               <button
                 onClick={() => updateQty(product.id, quantity - 1)}
                 className="w-9 h-9 flex items-center justify-center rounded-lg bg-white shadow-card hover:bg-red-50 hover:text-red-500 transition-colors border border-stone-200/80"
@@ -136,7 +136,7 @@ export default function ProductCard({ product }) {
             </div>
           )
         ) : (
-          <button disabled className="w-full py-2.5 rounded-xl text-sm font-medium bg-stone-100 text-stone-400 cursor-not-allowed">
+          <button disabled className="w-full py-2.5 rounded-md text-sm font-medium bg-stone-100 text-stone-400 cursor-not-allowed">
             Indisponible
           </button>
         )}

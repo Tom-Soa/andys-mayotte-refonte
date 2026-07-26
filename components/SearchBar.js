@@ -102,7 +102,7 @@ export default function SearchBar({ onClose }) {
           aria-label="Rechercher un produit"
           aria-autocomplete="list"
           autoComplete="off"
-          className="w-full pl-10 pr-8 py-2 bg-white/10 border border-white/20 rounded-xl text-sm text-white placeholder-stone-400 focus:outline-none focus:bg-white/15 focus:border-primary-400/60 transition-all"
+          className="w-full pl-10 pr-8 py-2 bg-white/10 border border-white/20 rounded-md text-sm text-white placeholder-stone-400 focus:outline-none focus:bg-white/15 focus:border-primary-400/60 transition-all"
         />
         {query && (
           <button
@@ -120,7 +120,7 @@ export default function SearchBar({ onClose }) {
         <ul
           role="listbox"
           aria-label="Suggestions de recherche"
-          className="absolute top-full left-0 right-0 mt-1.5 bg-white rounded-xl shadow-card border border-stone-200 overflow-hidden z-50"
+          className="absolute top-full left-0 right-0 mt-1.5 bg-white rounded-md shadow-card border border-stone-200 overflow-hidden z-50"
           style={{ boxShadow: '0 8px 32px rgba(10,38,24,0.14), 0 2px 8px rgba(0,0,0,0.08)' }}
         >
           {suggestions.map((product, i) => (

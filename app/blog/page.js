@@ -60,7 +60,7 @@ export default async function BlogPage() {
             {posts.map((post, i) => (
               <article
                 key={post.id}
-                className={`reveal delay-${Math.min(i + 1, 5)} group bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col`}
+                className={`reveal delay-${Math.min(i + 1, 5)} group bg-white rounded-md overflow-hidden border border-stone-100 shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col`}
               >
                 {/* Image */}
                 {post.image ? (

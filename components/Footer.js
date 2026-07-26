@@ -111,7 +111,7 @@ export default function Footer() {
             <div className="mt-7">
               <Link
                 href="/reservation"
-                className="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-400 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-gold active:scale-95"
+                className="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-400 text-white text-sm font-semibold px-5 py-2.5 rounded-md transition-all shadow-gold active:scale-95"
               >
                 Réserver en ligne
                 <ArrowRight size={14} />

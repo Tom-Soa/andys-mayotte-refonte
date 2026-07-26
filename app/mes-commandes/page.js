@@ -30,7 +30,7 @@ function CommandeCard({ commande }) {
   const total = items.reduce((s, it) => s + (parseFloat(it.price || 0) * (it.quantity || 1)), 0)
 
   return (
-    <div className="rounded-2xl border border-stone-100 bg-white shadow-card overflow-hidden">
+    <div className="rounded-md border border-stone-100 bg-white shadow-card overflow-hidden">
       {/* En-tête */}
       <button
         onClick={() => setOpen(v => !v)}
@@ -177,7 +177,7 @@ export default function MesCommandesPage() {
       {/* ── Formulaire ────────────────────────────────────────── */}
       <div className="max-w-3xl mx-auto px-4 py-12 md:py-16">
 
-        <div className="rounded-2xl border p-6 md:p-8 mb-10" style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.2)' }}>
+        <div className="rounded-md border p-6 md:p-8 mb-10" style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.2)' }}>
           <h2 className="font-serif font-semibold text-primary-800 text-xl mb-1">
             Retrouvez vos commandes
           </h2>
@@ -194,14 +194,14 @@ export default function MesCommandesPage() {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="votre@email.com"
                 required
-                className="w-full pl-10 pr-4 py-3 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                className="w-full pl-10 pr-4 py-3 bg-white border border-stone-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
                 style={{ '--tw-ring-color': 'rgba(201,161,74,0.4)' }}
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-6 py-3 rounded-md text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -226,7 +226,7 @@ export default function MesCommandesPage() {
         {searched && commandes !== null && (
           <div>
             {commandes.length === 0 ? (
-              <div className="text-center py-16 rounded-2xl border border-stone-100" style={{ background: '#F9F5EE' }}>
+              <div className="text-center py-16 rounded-md border border-stone-100" style={{ background: '#F9F5EE' }}>
                 <ShoppingBag size={40} className="mx-auto mb-4 text-stone-300" />
                 <p className="font-serif text-xl text-primary-800 mb-2">Aucune commande trouvée</p>
                 <p className="text-stone-400 text-sm">Aucune commande n&apos;a été trouvée pour <strong>{email}</strong>.</p>

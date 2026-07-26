@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 
-const fieldBase = 'w-full px-4 py-3 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all bg-white placeholder:text-stone-400'
+const fieldBase = 'w-full px-4 py-3 border rounded-md text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all bg-white placeholder:text-stone-400'
 const fieldNormal = `${fieldBase} border-stone-200 focus:ring-primary-500/40`
 const fieldError  = `${fieldBase} border-red-300 bg-red-50/60 focus:ring-red-300/40`
 
@@ -139,7 +139,7 @@ export default function ContactForm() {
       </div>
 
       {status === 'error' && (
-        <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+        <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-100 rounded-md px-4 py-3">
           <AlertCircle size={15} className="shrink-0" />
           {serverError || 'Une erreur est survenue. Réessayez.'}
         </div>
@@ -148,7 +148,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-6 py-3.5 rounded-xl text-sm transition-all shadow-forest hover:-translate-y-0.5"
+        className="w-full inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-6 py-3.5 rounded-md text-sm transition-all shadow-forest hover:-translate-y-0.5"
       >
         {status === 'loading' ? (
           <><Loader2 size={15} className="animate-spin" /> Envoi en cours…</>

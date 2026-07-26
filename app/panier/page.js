@@ -20,7 +20,7 @@ export default function PanierPage() {
         </p>
         <Link
           href="/produits"
-          className="inline-flex items-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3.5 rounded-xl transition-all shadow-forest"
+          className="inline-flex items-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3.5 rounded-md transition-all shadow-forest"
         >
           <ShoppingBag size={17} />
           Voir les produits
@@ -53,10 +53,10 @@ export default function PanierPage() {
             {cart.map(item => (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-4 flex items-center gap-4 transition-all hover:shadow-hover"
+                className="bg-white rounded-md shadow-card border border-stone-100/80 p-4 flex items-center gap-4 transition-all hover:shadow-hover"
               >
                 {/* Visuel produit */}
-                <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0"
+                <div className="w-16 h-16 rounded-md overflow-hidden shrink-0"
                      style={{ background: 'linear-gradient(135deg, #F0F7F4, #F7F2E8)' }}>
                   {item.image ? (
                     <img
@@ -81,7 +81,7 @@ export default function PanierPage() {
                 </div>
 
                 {/* Contrôle quantité */}
-                <div className="flex items-center gap-1 bg-stone-50 rounded-xl p-1 shrink-0">
+                <div className="flex items-center gap-1 bg-stone-50 rounded-md p-1 shrink-0">
                   <button
                     onClick={() => updateQty(item.id, item.quantity - 1)}
                     className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-card hover:bg-red-50 hover:text-red-500 transition-colors border border-stone-200/80"
@@ -102,7 +102,7 @@ export default function PanierPage() {
                 {/* Supprimer */}
                 <button
                   onClick={() => removeItem(item.id)}
-                  className="w-8 h-8 flex items-center justify-center rounded-xl text-stone-300 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
+                  className="w-8 h-8 flex items-center justify-center rounded-md text-stone-300 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
                 >
                   <Trash2 size={15} />
                 </button>
@@ -123,7 +123,7 @@ export default function PanierPage() {
 
           {/* ── Récapitulatif ────────────────────────────────────── */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-5 sticky top-20">
+            <div className="bg-white rounded-md shadow-card border border-stone-100/80 p-5 sticky top-20">
               <h2 className="font-serif font-semibold text-primary-800 text-lg mb-5">Récapitulatif</h2>
 
               {/* Détail articles */}
@@ -154,7 +154,7 @@ export default function PanierPage() {
               {/* CTA principal */}
               <Link
                 href="/reservation"
-                className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold py-3.5 rounded-xl transition-all shadow-gold mb-3"
+                className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold py-3.5 rounded-md transition-all shadow-gold mb-3"
               >
                 Réserver ma commande
                 <ArrowRight size={16} />

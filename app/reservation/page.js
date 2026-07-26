@@ -29,7 +29,7 @@ function getMinDate() {
 }
 
 // ─── Classes communes des champs ─────────────────────────────────────────────
-const fieldBase = 'w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow bg-white'
+const fieldBase = 'w-full px-4 py-2.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow bg-white'
 const fieldNormal = `${fieldBase} border-stone-200 focus:ring-primary-500/40`
 const fieldError  = `${fieldBase} border-red-300 bg-red-50 focus:ring-red-300/40`
 
@@ -123,7 +123,7 @@ export default function ReservationPage() {
         </p>
         <Link
           href="/produits"
-          className="inline-flex items-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3.5 rounded-xl transition-all shadow-forest"
+          className="inline-flex items-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3.5 rounded-md transition-all shadow-forest"
         >
           <ShoppingBag size={17} /> Voir les produits
         </Link>
@@ -159,7 +159,7 @@ export default function ReservationPage() {
             <div className="lg:col-span-2 space-y-5">
 
               {/* Informations personnelles */}
-              <div className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-6">
+              <div className="bg-white rounded-md shadow-card border border-stone-100/80 p-6">
                 <div className="flex items-center gap-2.5 mb-6">
                   <div className="w-8 h-8 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center">
                     <User size={15} className="text-primary-600" />
@@ -225,7 +225,7 @@ export default function ReservationPage() {
               </div>
 
               {/* Date & créneau */}
-              <div className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-6">
+              <div className="bg-white rounded-md shadow-card border border-stone-100/80 p-6">
                 <div className="flex items-center gap-2.5 mb-6">
                   <div className="w-8 h-8 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center">
                     <Clock size={15} className="text-primary-600" />
@@ -285,7 +285,7 @@ export default function ReservationPage() {
 
             {/* ── Récapitulatif commande ──────────────────────────── */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl shadow-card border border-stone-100/80 p-5 sticky top-20">
+              <div className="bg-white rounded-md shadow-card border border-stone-100/80 p-5 sticky top-20">
                 <h2 className="font-serif font-semibold text-primary-800 text-lg mb-5">Votre commande</h2>
 
                 {/* Articles */}
@@ -311,7 +311,7 @@ export default function ReservationPage() {
                 </div>
 
                 {/* Rappel */}
-                <div className="rounded-xl p-3.5 mb-5 text-xs space-y-1.5 border"
+                <div className="rounded-md p-3.5 mb-5 text-xs space-y-1.5 border"
                      style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
                   <div className="flex items-center gap-2 text-stone-600">
                     <MapPin size={12} className="text-primary-500 shrink-0" />
@@ -325,7 +325,7 @@ export default function ReservationPage() {
 
                 {/* Erreurs globales */}
                 {(errors.submit || errors.cart) && (
-                  <p className="text-red-500 text-sm mb-3 bg-red-50 border border-red-100 px-3 py-2 rounded-xl">
+                  <p className="text-red-500 text-sm mb-3 bg-red-50 border border-red-100 px-3 py-2 rounded-md">
                     {errors.submit || errors.cart}
                   </p>
                 )}
@@ -334,7 +334,7 @@ export default function ReservationPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-400 disabled:bg-stone-200 disabled:cursor-not-allowed active:scale-95 text-white font-semibold py-3.5 rounded-xl transition-all shadow-gold"
+                  className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-400 disabled:bg-stone-200 disabled:cursor-not-allowed active:scale-95 text-white font-semibold py-3.5 rounded-md transition-all shadow-gold"
                 >
                   {loading ? (
                     <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

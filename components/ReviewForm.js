@@ -40,7 +40,7 @@ export default function ReviewForm() {
 
   if (success) {
     return (
-      <div className="mt-8 rounded-2xl border p-8 text-center" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.25)' }}>
+      <div className="mt-8 rounded-md border p-8 text-center" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.25)' }}>
         <p className="text-3xl mb-3">✅</p>
         <p className="font-serif text-xl font-semibold text-primary-800 mb-1">Merci pour votre avis !</p>
         <p className="text-stone-500 text-sm">Votre avis sera publié après modération.</p>
@@ -49,7 +49,7 @@ export default function ReviewForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 rounded-2xl border p-6 md:p-8" style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.2)' }}>
+    <form onSubmit={handleSubmit} className="mt-8 rounded-md border p-6 md:p-8" style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.2)' }}>
       <h3 className="font-serif font-semibold text-primary-800 text-xl mb-1">Laissez votre avis</h3>
       <p className="text-stone-500 text-sm mb-6">Votre avis sera publié après vérification.</p>
 
@@ -64,7 +64,7 @@ export default function ReviewForm() {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="Jean Dupont"
-            className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
             style={{ '--tw-ring-color': 'rgba(201,161,74,0.4)' }}
           />
         </div>
@@ -106,7 +106,7 @@ export default function ReviewForm() {
             onChange={e => setComment(e.target.value)}
             placeholder="Partagez votre expérience..."
             rows={3}
-            className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow resize-none"
+            className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow resize-none"
             style={{ '--tw-ring-color': 'rgba(201,161,74,0.4)' }}
           />
         </div>
@@ -118,7 +118,7 @@ export default function ReviewForm() {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3 rounded-xl text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-primary-800 active:scale-95 text-white font-semibold px-7 py-3 rounded-md text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? 'Envoi...' : 'Publier mon avis'}
         </button>

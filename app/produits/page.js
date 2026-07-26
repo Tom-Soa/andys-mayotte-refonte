@@ -80,7 +80,7 @@ export default function ProduitsPage() {
       <div className="max-w-6xl mx-auto px-4 py-10">
 
         {/* ── Barre de filtres ──────────────────────────────────── */}
-        <div className="rounded-2xl border p-4 mb-10"
+        <div className="rounded-md border p-4 mb-10"
              style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
@@ -93,7 +93,7 @@ export default function ProduitsPage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 aria-label="Rechercher un produit"
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
+                className="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-shadow"
                 style={{ '--tw-ring-color': 'rgba(201,161,74,0.4)' }}
               />
               {search && (
@@ -108,7 +108,7 @@ export default function ProduitsPage() {
             </div>
 
             {/* Filtre dispo */}
-            <label className="flex items-center gap-2 text-sm text-stone-600 cursor-pointer select-none bg-white px-3.5 py-2.5 rounded-xl border border-stone-200 hover:border-primary-400/50 transition-colors">
+            <label className="flex items-center gap-2 text-sm text-stone-600 cursor-pointer select-none bg-white px-3.5 py-2.5 rounded-md border border-stone-200 hover:border-primary-400/50 transition-colors">
               <input
                 type="checkbox"
                 checked={showAvailableOnly}
