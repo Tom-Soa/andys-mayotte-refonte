@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
   const p = await fetchProduct(params.id)
   if (!p) return { title: 'Produit introuvable' }
   const url = `https://chezandys.com/produits/${p.id}`
-  const title = `${p.name} — ${parseFloat(p.price).toFixed(2)} €${p.unit ? ' / ' + p.unit : ''}`
+  const title = `${p.name} - ${parseFloat(p.price).toFixed(2)} €${p.unit ? ' / ' + p.unit : ''}`
   const description = (p.description || `${p.name} disponible chez Andy's, grossiste alimentaire à Poroani, Mayotte. Réservation en ligne, retrait en magasin.`).slice(0, 160)
   return {
     title,
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }) {
     '@type': 'Product',
     '@id': `https://chezandys.com/produits/${p.id}#product`,
     name: p.name,
-    description: p.description || `${p.name} — disponible chez Andy's, grossiste alimentaire à Poroani, Mayotte.`,
+    description: p.description || `${p.name} - disponible chez Andy's, grossiste alimentaire à Poroani, Mayotte.`,
     image: p.image ? [p.image] : ['https://chezandys.com/logo.png'],
     sku: String(p.id),
     category: p.category || 'Alimentaire',

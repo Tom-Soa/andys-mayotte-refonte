@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata = {
-  title: "Mentions légales — Chez Andy's",
+  title: "Mentions légales - Chez Andy's",
   description: "Mentions légales du site Chez Andy's, grossiste alimentaire à Poroani, Mayotte.",
 }
 
@@ -32,7 +32,7 @@ export default function MentionsLegalesPage() {
             <li><strong>SIREN :</strong> 938 321 536</li>
             <li><strong>N° TVA intracommunautaire :</strong> FR79938321536</li>
             <li><strong>RCS :</strong> 938 321 536 R.C.S. Mamoudzou</li>
-            <li><strong>Siège social :</strong> 3 rue Mairie Annexe, Poroani, Quartier 100 Villas — 97620 Chirongui, Mayotte (976)</li>
+            <li><strong>Siège social :</strong> 3 rue Mairie Annexe, Poroani, Quartier 100 Villas - 97620 Chirongui, Mayotte (976)</li>
             <li><strong>Téléphone :</strong> +33 672 75 84 78</li>
             <li><strong>Email :</strong> contact@chezandys.com</li>
           </ul>

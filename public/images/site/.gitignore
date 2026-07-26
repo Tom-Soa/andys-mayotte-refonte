@@ -1,0 +1,11 @@
+# Environment variables - DO NOT COMMIT
+.env
+.env.local
+.env*.local
+.env.production
+
+# OS
+.DS_Store
+
+# Dependencies
+node_modules/

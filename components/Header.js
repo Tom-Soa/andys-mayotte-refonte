@@ -44,6 +44,8 @@ export default function Header() {
     { href: '/produits',    label: 'Catalogue' },
     { href: '/reservation', label: 'Réservation' },
     { href: '/a-propos',    label: 'À propos' },
+    { href: '/faq',         label: 'FAQ' },
+    { href: '/blog',        label: 'Actualités' },
     { href: '/contact',     label: 'Contact' },
   ]
 

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata = {
-  title: "Conditions Générales de Vente — Chez Andy's",
+  title: "Conditions Générales de Vente - Chez Andy's",
   description: "Conditions Générales de Vente de Chez Andy's, grossiste alimentaire à Poroani, Mayotte.",
 }
 
@@ -17,7 +17,7 @@ export default function CGVPage() {
             <ArrowLeft size={14} /> Retour à l&apos;accueil
           </Link>
           <h1 className="font-serif font-semibold text-white text-3xl md:text-4xl">Conditions Générales de Vente</h1>
-          <p className="text-stone-400 text-sm mt-2">Dernière mise à jour : mars 2025 — Version 1.0</p>
+          <p className="text-stone-400 text-sm mt-2">Dernière mise à jour : mars 2025 - Version 1.0</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@ export default function CGVPage() {
         </div>
 
         <Section title="1. Objet">
-          <p>Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre la société <strong>Andy&apos;s (Chez Andy&apos;s)</strong>, SAS au capital variable, immatriculée au RCS de Mamoudzou sous le numéro 938 321 536, dont le siège social est situé au 3 rue Mairie Annexe, Poroani, Quartier 100 Villas — 97620 Chirongui, Mayotte (ci-après « le Vendeur »), et toute personne physique ou morale souhaitant procéder à une réservation via le site <strong>chezandys.com</strong> (ci-après « le Client »).</p>
+          <p>Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre la société <strong>Andy&apos;s (Chez Andy&apos;s)</strong>, SAS au capital variable, immatriculée au RCS de Mamoudzou sous le numéro 938 321 536, dont le siège social est situé au 3 rue Mairie Annexe, Poroani, Quartier 100 Villas - 97620 Chirongui, Mayotte (ci-après « le Vendeur »), et toute personne physique ou morale souhaitant procéder à une réservation via le site <strong>chezandys.com</strong> (ci-après « le Client »).</p>
         </Section>
 
         <Section title="2. Produits et services">
@@ -61,7 +61,7 @@ export default function CGVPage() {
           <address className="mt-2 not-italic text-sm bg-stone-50 rounded-xl p-4 border border-stone-100">
             Chez Andy&apos;s<br />
             3 rue Mairie Annexe, Poroani<br />
-            Quartier 100 Villas — 97620 Chirongui<br />
+            Quartier 100 Villas - 97620 Chirongui<br />
             Mayotte (976)
           </address>
           <p className="mt-3">Le Client est invité à se présenter au créneau horaire choisi lors de la réservation. En cas de retard, Andy&apos;s ne saurait être tenu responsable de l&apos;indisponibilité des produits réservés.</p>

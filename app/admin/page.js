@@ -341,7 +341,7 @@ export default function AdminPage() {
           alert(err.error || 'Erreur serveur')
           return
         }
-        notify('Paiement validé ✓ — Facture envoyée par email')
+        notify('Paiement validé ✓ - Facture envoyée par email')
       } else {
         const res = await fetch('/api/invoices', {
           method: 'PATCH',
@@ -789,7 +789,7 @@ export default function AdminPage() {
                       </p>
                       <StatusBadge status={r.status} />
                     </div>
-                    <p className="text-sm text-stone-500">{r.telephone} — {r.email}</p>
+                    <p className="text-sm text-stone-500">{r.telephone} - {r.email}</p>
                     <p className="text-xs text-stone-400 mt-0.5">#{r.id}</p>
                   </div>
                   <div className="text-right">
@@ -1040,7 +1040,7 @@ export default function AdminPage() {
                     </div>
                   ))}
 
-                  {/* Catégorie — select */}
+                  {/* Catégorie - select */}
                   <div>
                     <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Catégorie</label>
                     <select
@@ -1056,7 +1056,7 @@ export default function AdminPage() {
                     </select>
                   </div>
 
-                  {/* Emoji — optionnel, avec bouton effacer */}
+                  {/* Emoji - optionnel, avec bouton effacer */}
                   <div>
                     <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">
                       Emoji <span className="text-stone-300 normal-case font-normal">(optionnel)</span>
@@ -1082,7 +1082,7 @@ export default function AdminPage() {
                     </div>
                   </div>
 
-                  {/* Conditionnement — select */}
+                  {/* Conditionnement - select */}
                   <div>
                     <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Conditionnement</label>
                     <select
@@ -1360,7 +1360,7 @@ export default function AdminPage() {
                           <div className="flex items-center gap-3 flex-wrap">
                             <StatusBadge status={order.status} />
                             <span className="text-sm font-medium text-stone-700">
-                              {formatDate(order.date)} — {order.creneau}
+                              {formatDate(order.date)} - {order.creneau}
                             </span>
                             <div className="flex flex-wrap gap-1.5">
                               {order.articles?.map((a, i) => (
@@ -1582,7 +1582,7 @@ export default function AdminPage() {
                         }}
                         className="text-sm border border-stone-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500"
                       />
-                      <span className="text-stone-400 text-sm">–</span>
+                      <span className="text-stone-400 text-sm">-</span>
                       <input
                         type="time"
                         value={h.closeTime}
@@ -1951,7 +1951,7 @@ export default function AdminPage() {
 
             {dateModal.mode === 'edit' && !dateModal.isPaid && (
               <p className="text-xs text-stone-400 italic mb-5">
-                Cette facture est en attente de paiement — seule la date d&apos;émission est modifiable.
+                Cette facture est en attente de paiement - seule la date d&apos;émission est modifiable.
               </p>
             )}
 
@@ -2059,10 +2059,10 @@ export default function AdminPage() {
                           onChange={e => selectProductForArticle(idx, e.target.value)}
                           className="flex-1 border border-stone-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                         >
-                          <option value="">— Choisir un produit du catalogue —</option>
+                          <option value="">- Choisir un produit du catalogue -</option>
                           {products.map(p => (
                             <option key={p.id} value={p.id}>
-                              {p.name}{p.unit ? ` (${p.unit})` : ''} — {parseFloat(p.price || 0).toFixed(2)} €
+                              {p.name}{p.unit ? ` (${p.unit})` : ''} - {parseFloat(p.price || 0).toFixed(2)} €
                             </option>
                           ))}
                           <option value="__custom__">✏️ Article personnalisé (hors catalogue)</option>

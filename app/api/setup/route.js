@@ -8,7 +8,7 @@ function readJson(name) {
   catch { return [] }
 }
 
-// POST /api/setup — crée les tables et importe les données JSON existantes
+// POST /api/setup - crée les tables et importe les données JSON existantes
 // Protégé par le mot de passe admin
 export async function POST(request) {
   try {

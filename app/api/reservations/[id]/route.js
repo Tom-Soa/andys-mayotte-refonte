@@ -3,7 +3,7 @@ import { sql } from '@/lib/db'
 import { sendInvoiceEmail } from '@/lib/mailer'
 import { verifyAdminAuth } from '@/lib/auth'
 
-// ── PATCH — Valider le paiement + déduire le stock ────────────────────────────
+// ── PATCH - Valider le paiement + déduire le stock ────────────────────────────
 export async function PATCH(request, { params }) {
   if (!(await verifyAdminAuth())) {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
@@ -102,7 +102,7 @@ export async function PATCH(request, { params }) {
   }
 }
 
-// ── DELETE — Annuler une réservation ─────────────────────────────────────────
+// ── DELETE - Annuler une réservation ─────────────────────────────────────────
 export async function DELETE(request, { params }) {
   if (!(await verifyAdminAuth())) {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })

@@ -17,7 +17,7 @@ function generateTimeSlots() {
       const nextH = m === 30 ? h + 1 : h
       const nhh = String(nextH).padStart(2, '0')
       const nmm = String(nextM).padStart(2, '0')
-      slots.push(`${hh}:${mm} – ${nhh}:${nmm}`)
+      slots.push(`${hh}:${mm} - ${nhh}:${nmm}`)
     }
   }
   return slots

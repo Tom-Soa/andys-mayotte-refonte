@@ -9,7 +9,7 @@ import WhatsAppButton from '@/components/WhatsAppButton'
 
 export const metadata = {
   title: {
-    default: "Chez Andy's — Grossiste alimentaire à Mayotte",
+    default: "Chez Andy's - Grossiste alimentaire à Mayotte",
     template: "%s · Chez Andy's",
   },
   description:
@@ -25,13 +25,13 @@ export const metadata = {
     locale: 'fr_FR',
     url: 'https://chezandys.com/',
     siteName: "Chez Andy's",
-    title: "Chez Andy's — Grossiste alimentaire à Mayotte",
+    title: "Chez Andy's - Grossiste alimentaire à Mayotte",
     description: "Commandez vos produits alimentaires en gros à Poroani, Mayotte. Réservation en ligne, retrait et paiement en magasin.",
-    images: [{ url: '/logo.png', width: 1200, height: 630, alt: "Chez Andy's — Grossiste alimentaire" }],
+    images: [{ url: '/logo.png', width: 1200, height: 630, alt: "Chez Andy's - Grossiste alimentaire" }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Chez Andy's — Grossiste alimentaire à Mayotte",
+    title: "Chez Andy's - Grossiste alimentaire à Mayotte",
     description: "Réservation en ligne, retrait et paiement en magasin à Poroani.",
     images: ['/logo.png'],
   },

@@ -152,7 +152,7 @@ export default function ConfirmationPage() {
             <li className="flex items-start gap-3 text-sm text-stone-700">
               <MapPin size={16} className="text-primary-500 shrink-0 mt-0.5" />
               <span>
-                <strong>Où :</strong> Andy&apos;s — Grossiste alimentaire, Poroani, Mayotte (976)
+                <strong>Où :</strong> Andy&apos;s - Grossiste alimentaire, Poroani, Mayotte (976)
               </span>
             </li>
             <li className="flex items-start gap-3 text-sm text-stone-700">

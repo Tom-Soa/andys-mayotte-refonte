@@ -41,7 +41,7 @@ export default async function FacturePage({ params }) {
 
   return (
     <>
-      {/* Barre d'actions — masquée à l'impression */}
+      {/* Barre d'actions - masquée à l'impression */}
       <div className="print:hidden bg-primary-50 border-b border-primary-100 px-6 py-3 flex items-center justify-between gap-4">
         <p className="text-sm text-primary-700 font-medium">
           Facture <span className="font-bold">{invoice.id}</span>
@@ -52,7 +52,7 @@ export default async function FacturePage({ params }) {
         <InvoiceActions invoiceId={invoice.id} />
       </div>
 
-      {/* Corps de la facture — max-w limité pour ressembler à un document A4 */}
+      {/* Corps de la facture - max-w limité pour ressembler à un document A4 */}
       <div className="max-w-[780px] mx-auto my-10 px-4 print:my-0 print:px-0">
         <div id="invoice-content" className="bg-white border border-stone-200 rounded-2xl overflow-hidden print:rounded-none print:border-0 shadow-card print:shadow-none">
 
@@ -65,7 +65,7 @@ export default async function FacturePage({ params }) {
                 <h1 className="font-serif text-xl font-bold text-primary-800">Andy&apos;s Mayotte</h1>
                 <p className="text-sm text-stone-500 mt-0.5">Grossiste alimentaire</p>
                 <p className="text-sm text-stone-500">3 rue Mairie Annexe, Poroani</p>
-                <p className="text-sm text-stone-500">Quartier 100 Villas — 97620 Chirongui</p>
+                <p className="text-sm text-stone-500">Quartier 100 Villas - 97620 Chirongui</p>
                 <p className="text-sm text-stone-500">+33 672 75 84 78</p>
                 <p className="text-sm text-stone-500">contact@chezandys.com</p>
               </div>
@@ -122,7 +122,7 @@ export default async function FacturePage({ params }) {
                   </p>
                 )}
                 <p className="text-sm text-stone-600 mt-1">
-                  <span className="font-medium text-stone-700">Lieu :</span> Andy&apos;s — Poroani, Mayotte
+                  <span className="font-medium text-stone-700">Lieu :</span> Andy&apos;s - Poroani, Mayotte
                 </p>
               </div>
             </div>
@@ -178,21 +178,21 @@ export default async function FacturePage({ params }) {
             <div className="bg-primary-50 border border-primary-100 rounded-xl px-5 py-4 mb-8">
               <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2">Moyen de paiement</p>
               <p className="text-sm text-primary-800 font-medium">
-                Paiement en espèces ou par chèque — réglé au moment du retrait en magasin
+                Paiement en espèces ou par chèque - réglé au moment du retrait en magasin
               </p>
               <p className="text-xs text-stone-400 mt-1">
-                Andy&apos;s Mayotte — 3 rue Mairie Annexe, Poroani, 97620 Chirongui
+                Andy&apos;s Mayotte - 3 rue Mairie Annexe, Poroani, 97620 Chirongui
 </p>
             </div>
 
           </div>
 
-          {/* ── Mentions légales — bas de facture ── */}
+          {/* ── Mentions légales - bas de facture ── */}
           <div className="border-t border-stone-100 px-8 py-4 bg-stone-50">
             <p className="text-center text-stone-400" style={{ fontSize: '10px', lineHeight: '1.8' }}>
-              Andy&apos;s Mayotte — 3 rue Mairie Annexe, Poroani, Quartier 100 Villas — 97620 Chirongui — +33 672 75 84 78 — contact@chezandys.com<br />
-              SAS — SIREN&nbsp;938&nbsp;321&nbsp;536 — Forme juridique&nbsp;: Société par Actions Simplifiée<br />
-              N°&nbsp;TVA&nbsp;intracommunautaire&nbsp;: FR79938321536 — RCS&nbsp;938&nbsp;321&nbsp;536&nbsp;R.C.S.&nbsp;Mamoudzou
+              Andy&apos;s Mayotte - 3 rue Mairie Annexe, Poroani, Quartier 100 Villas - 97620 Chirongui - +33 672 75 84 78 - contact@chezandys.com<br />
+              SAS - SIREN&nbsp;938&nbsp;321&nbsp;536 - Forme juridique&nbsp;: Société par Actions Simplifiée<br />
+              N°&nbsp;TVA&nbsp;intracommunautaire&nbsp;: FR79938321536 - RCS&nbsp;938&nbsp;321&nbsp;536&nbsp;R.C.S.&nbsp;Mamoudzou
             </p>
           </div>
 

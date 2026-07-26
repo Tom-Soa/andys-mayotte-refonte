@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 pt-14 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
 
-          {/* Col 1 — Identité (5 cols) */}
+          {/* Col 1 - Identité (5 cols) */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-3 mb-5">
               <img
@@ -58,7 +58,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2 — Horaires (3 cols) */}
+          {/* Col 2 - Horaires (3 cols) */}
           <div className="md:col-span-3">
             <h3 className="text-white font-semibold text-xs uppercase tracking-widest mb-5 flex items-center gap-2">
               <Clock size={13} className="text-primary-500" />
@@ -70,17 +70,17 @@ export default function Footer() {
                   <li key={h.day} className="flex justify-between text-xs">
                     <span className="text-stone-500">{h.day.slice(0, 3)}</span>
                     <span className={`font-medium ${!h.open ? 'text-stone-600' : 'text-stone-300'}`}>
-                      {h.open ? `${fmtTime(h.openTime)} – ${fmtTime(h.closeTime)}` : 'Fermé'}
+                      {h.open ? `${fmtTime(h.openTime)} - ${fmtTime(h.closeTime)}` : 'Fermé'}
                     </span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-stone-400">Lun – Sam : 8h00 – 18h00</p>
+              <p className="text-sm text-stone-400">Lun - Sam : 8h00 - 18h00</p>
             )}
           </div>
 
-          {/* Col 3 — Navigation (4 cols) */}
+          {/* Col 3 - Navigation (4 cols) */}
           <div className="md:col-span-4">
             <h3 className="text-white font-semibold text-xs uppercase tracking-widest mb-5">
               Navigation
@@ -125,7 +125,7 @@ export default function Footer() {
       <div className="border-t border-white/8 px-4 py-5 relative">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-stone-600">
-            © {new Date().getFullYear()} Chez Andy&apos;s — Poroani, Mayotte. Tous droits réservés.
+            © {new Date().getFullYear()} Chez Andy&apos;s - Poroani, Mayotte. Tous droits réservés.
           </p>
           {/* Liens légaux */}
           <div className="flex items-center gap-4 flex-wrap justify-center">

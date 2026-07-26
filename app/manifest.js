@@ -1,6 +1,6 @@
 export default function manifest() {
   return {
-    name: "Chez Andy's — Grossiste alimentaire",
+    name: "Chez Andy's - Grossiste alimentaire",
     short_name: "Andy's",
     description: "Commandez en ligne, récupérez à Poroani, Mayotte",
     start_url: "/",

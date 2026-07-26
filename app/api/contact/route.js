@@ -49,12 +49,12 @@ export async function POST(request) {
 
     const to = process.env.CONTACT_EMAIL || process.env.SMTP_USER || 'contact@chezandys.com'
     const from = process.env.SMTP_FROM || "Andy's Mayotte <noreply@chezandys.com>"
-    const subjectLine = `[Contact] ${sujet?.trim() || 'Nouveau message'} — ${nom.trim()}`
+    const subjectLine = `[Contact] ${sujet?.trim() || 'Nouveau message'} - ${nom.trim()}`
 
     const html = `<!DOCTYPE html><html><body style="margin:0;font-family:Arial,sans-serif;background:#f9fafb">
       <div style="max-width:560px;margin:32px auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
         <div style="background:#1c4532;padding:24px 32px">
-          <h1 style="margin:0;color:white;font-size:20px">Nouveau message — Contact</h1>
+          <h1 style="margin:0;color:white;font-size:20px">Nouveau message - Contact</h1>
           <p style="margin:6px 0 0;color:#6ee7b7;font-size:13px">Andy's Mayotte</p>
         </div>
         <div style="padding:28px 32px">
@@ -68,7 +68,7 @@ export async function POST(request) {
           </div>
         </div>
         <div style="padding:12px 32px;background:#f9fafb;border-top:1px solid #e5e7eb;text-align:center">
-          <p style="margin:0;font-size:11px;color:#9ca3af">Andy's Mayotte — contact@chezandys.com</p>
+          <p style="margin:0;font-size:11px;color:#9ca3af">Andy's Mayotte - contact@chezandys.com</p>
         </div>
       </div>
     </body></html>`

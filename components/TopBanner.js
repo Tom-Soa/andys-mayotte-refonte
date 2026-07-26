@@ -1,9 +1,10 @@
-import { MapPin, CalendarCheck, Store, CreditCard, Package } from 'lucide-react'
+import { MapPin, CalendarCheck, Store, CreditCard, Package, Handshake } from 'lucide-react'
 
 /* Bandeau defilant au-dessus du header : lent, avec icones. */
 export default function TopBanner() {
   const items = [
     { icon: <Package size={12} strokeWidth={2.2} />,       text: 'Grossiste alimentaire' },
+    { icon: <Handshake size={12} strokeWidth={2.2} />,     text: 'Partenaire de plus de 80 magasins' },
     { icon: <MapPin size={12} strokeWidth={2.2} />,        text: 'Poroani, Mayotte' },
     { icon: <CalendarCheck size={12} strokeWidth={2.2} />, text: 'Réservation en ligne' },
     { icon: <Store size={12} strokeWidth={2.2} />,         text: 'Retrait en magasin' },

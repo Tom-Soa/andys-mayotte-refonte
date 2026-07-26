@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata = {
-  title: "Politique de confidentialité & Cookies — Chez Andy's",
+  title: "Politique de confidentialité & Cookies - Chez Andy's",
   description: "Politique de confidentialité et gestion des cookies du site Chez Andy's, conformément au RGPD.",
 }
 
@@ -17,7 +17,7 @@ export default function PolitiqueConfidentialitePage() {
             <ArrowLeft size={14} /> Retour à l&apos;accueil
           </Link>
           <h1 className="font-serif font-semibold text-white text-3xl md:text-4xl">Politique de confidentialité & Cookies</h1>
-          <p className="text-stone-400 text-sm mt-2">Dernière mise à jour : mars 2025 — Conforme RGPD (UE 2016/679)</p>
+          <p className="text-stone-400 text-sm mt-2">Dernière mise à jour : mars 2025 - Conforme RGPD (UE 2016/679)</p>
         </div>
       </div>
 
@@ -27,9 +27,9 @@ export default function PolitiqueConfidentialitePage() {
         <Section title="1. Responsable du traitement">
           <p>Le responsable du traitement des données personnelles collectées sur <strong>chezandys.com</strong> est :</p>
           <ul className="mt-3 space-y-1 text-sm">
-            <li><strong>Société :</strong> Andy&apos;s (Chez Andy&apos;s) — SAS</li>
+            <li><strong>Société :</strong> Andy&apos;s (Chez Andy&apos;s) - SAS</li>
             <li><strong>SIREN :</strong> 938 321 536</li>
-            <li><strong>Adresse :</strong> 3 rue Mairie Annexe, Poroani — 97620 Chirongui, Mayotte</li>
+            <li><strong>Adresse :</strong> 3 rue Mairie Annexe, Poroani - 97620 Chirongui, Mayotte</li>
             <li><strong>Email :</strong> <a href="mailto:contact@chezandys.com" className="text-primary-700 underline">contact@chezandys.com</a></li>
             <li><strong>Téléphone :</strong> +33 672 75 84 78</li>
           </ul>
@@ -97,9 +97,9 @@ export default function PolitiqueConfidentialitePage() {
           <p>Vos données personnelles sont traitées par Andy&apos;s uniquement. Elles ne sont pas vendues, louées ou cédées à des tiers.</p>
           <p className="mt-3">Elles peuvent être transmises à des sous-traitants techniques dans le strict cadre de l&apos;exécution du service :</p>
           <ul className="mt-2 list-disc list-inside space-y-1 text-sm">
-            <li><strong>Vercel Inc.</strong> — hébergement du site (USA, clauses contractuelles types UE)</li>
-            <li><strong>Neon Inc.</strong> — hébergement base de données (USA, clauses contractuelles types UE)</li>
-            <li><strong>Fournisseur SMTP</strong> — envoi des emails de confirmation</li>
+            <li><strong>Vercel Inc.</strong> - hébergement du site (USA, clauses contractuelles types UE)</li>
+            <li><strong>Neon Inc.</strong> - hébergement base de données (USA, clauses contractuelles types UE)</li>
+            <li><strong>Fournisseur SMTP</strong> - envoi des emails de confirmation</li>
           </ul>
         </Section>
 
@@ -123,7 +123,7 @@ export default function PolitiqueConfidentialitePage() {
           <p className="mt-4">Pour exercer vos droits, contactez-nous à :</p>
           <ul className="mt-2 space-y-1 text-sm">
             <li>Email : <a href="mailto:contact@chezandys.com" className="text-primary-700 underline">contact@chezandys.com</a></li>
-            <li>Courrier : Andy&apos;s — 3 rue Mairie Annexe, Poroani, 97620 Chirongui, Mayotte</li>
+            <li>Courrier : Andy&apos;s - 3 rue Mairie Annexe, Poroani, 97620 Chirongui, Mayotte</li>
           </ul>
           <p className="mt-3">Vous avez également le droit d&apos;introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l&apos;Informatique et des Libertés) : <a href="https://www.cnil.fr" className="text-primary-700 underline" target="_blank" rel="noopener noreferrer">www.cnil.fr</a></p>
         </Section>

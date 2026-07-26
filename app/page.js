@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { sql } from '@/lib/db'
 import ProductCard from '@/components/ProductCard'
-import ContactForm from '@/components/ContactForm'
 import ReviewForm from '@/components/ReviewForm'
 import HeroMedia from '@/components/HeroMedia'
 import fallbackProducts from '@/data/products.json'
@@ -46,7 +45,7 @@ function ReviewCard({ review }) {
 export const dynamic = 'force-dynamic'
 
 function fmtTime(t) { return (t || '').replace(/^0/, '').replace(':', 'h') }
-function fmtHours(h) { return h.open ? `${fmtTime(h.openTime)} – ${fmtTime(h.closeTime)}` : 'Fermé' }
+function fmtHours(h) { return h.open ? `${fmtTime(h.openTime)} - ${fmtTime(h.closeTime)}` : 'Fermé' }
 
 export default async function HomePage() {
   const DAY_ORDER = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche']
@@ -63,7 +62,7 @@ export default async function HomePage() {
   const todayHours = hours[todayIdx] ?? null
   const todayLabel = todayHours
     ? (todayHours.open ? `Ouvert · ${fmtHours(todayHours)}` : "Fermé aujourd'hui")
-    : 'Lun – Sam · 8h00 – 18h00'
+    : 'Lun - Sam · 8h00 - 18h00'
 
   /* Produits vedettes : base de donnees, sinon catalogue local (products.json) */
   const productSource = products.length > 0 ? products : fallbackProducts
@@ -103,28 +102,29 @@ export default async function HomePage() {
             {/* Texte principal */}
             <div className="flex-1 text-center md:text-left">
 
-              {/* Badge localisation */}
-              <div className="anim-fade-in inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.16em] uppercase text-primary-300 border border-primary-500/35 mb-7">
+              {/* Etiquette localisation (meme langage que les labels de sections) */}
+              <div className="anim-fade-in inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.24em] uppercase text-primary-300 border-[1.5px] border-primary-500/50 rounded-[2px] px-3.5 py-2 mb-7"
+                   style={{ outline: '1px solid rgba(201,161,74,0.2)', outlineOffset: '3px', transform: 'rotate(-1.2deg)' }}>
                 <MapPin size={10} strokeWidth={2.5} />
                 Poroani · Mayotte · 976
               </div>
 
               {/* Titre principal */}
               <h1
-                className="anim-fade-up font-serif font-semibold text-white leading-[0.93] mb-7"
-                style={{ fontSize: 'clamp(2.8rem, 8.5vw, 7rem)', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}
+                className="anim-fade-up font-serif font-semibold text-white leading-[0.93] mb-6"
+                style={{ fontSize: 'clamp(2.8rem, 8vw, 6.5rem)', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}
               >
-                Votre<br />
-                <em className="not-italic" style={{ color: '#C9A14A' }}>grossiste</em><br />
-                alimentaire
+                Votre <em className="not-italic" style={{ color: '#C9A14A' }}>grossiste</em><br />
+                alimentaire<br />
+                à Mayotte
               </h1>
 
-              <p className="anim-fade-up-1 text-stone-300 text-base md:text-lg leading-relaxed mb-10 max-w-md mx-auto md:mx-0">
+              <p className="anim-fade-up-1 text-stone-300 text-base md:text-lg leading-relaxed mb-9 max-w-md mx-auto md:mx-0">
                 Commandez en ligne, choisissez votre créneau de retrait.
                 Récupérez à Poroani et payez sur place.
               </p>
 
-              <div className="anim-fade-up-2 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+              <div className="anim-fade-up-2 flex flex-col sm:flex-row gap-3 justify-center md:justify-start mb-10">
                 <Link
                   href="/produits"
                   className="inline-flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold px-8 py-4 rounded-md text-sm transition-all shadow-gold hover:-translate-y-0.5"
@@ -140,30 +140,57 @@ export default async function HomePage() {
                   Réserver un créneau
                 </Link>
               </div>
+
+              {/* Preuves chiffrees */}
+              <div className="anim-fade-up-3 flex items-center justify-center md:justify-start gap-6 text-left">
+                {[
+                  { valeur: '80+', label: 'magasins partenaires' },
+                  { valeur: '50+', label: 'références en stock' },
+                  { valeur: '6j/7', label: 'du lundi au samedi' },
+                ].map((s, i) => (
+                  <div key={s.label} className={`${i > 0 ? 'border-l border-white/15 pl-6' : ''}`}>
+                    <p className="font-serif font-bold text-white text-2xl md:text-3xl leading-none">{s.valeur}</p>
+                    <p className="text-stone-400 text-[11px] mt-1 leading-tight max-w-[7rem]">{s.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Carte infos — desktop uniquement */}
-            <div className="anim-fade-up-3 hidden md:block flex-shrink-0 w-72 glass-dark rounded-md overflow-hidden shadow-forest">
-              {/* En-tête */}
-              <div className="flex items-center gap-2.5 px-5 py-4 border-b border-white/8">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <p className="text-white font-semibold text-sm">Ouvert aujourd&apos;hui</p>
+            {/* Carte infos magasin - desktop uniquement */}
+            <div className="anim-fade-up-3 hidden md:block flex-shrink-0 w-80 lg:w-[22rem] glass-dark rounded-md overflow-hidden shadow-forest">
+              {/* Statut du jour */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <p className="text-white font-semibold text-[15px]">Ouvert aujourd&apos;hui</p>
+                </div>
+                <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-primary-400">Le magasin</span>
               </div>
-              {/* Infos */}
-              <ul className="px-5 py-4 space-y-3.5">
+              {/* Horaire du jour mis en avant */}
+              <div className="px-6 py-5 border-b border-white/8">
+                <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-stone-500 mb-1.5">Horaires du jour</p>
+                <p className="font-serif font-semibold text-white text-2xl leading-none">{todayLabel.replace('Ouvert · ', '')}</p>
+              </div>
+              {/* Infos pratiques */}
+              <ul className="px-6 py-5 space-y-4">
                 {[
-                  { icon: <Clock size={14} />,      text: todayLabel },
-                  { icon: <MapPin size={14} />,     text: '3 rue Mairie Annexe, Poroani\nQuartier 100 Villas — 97620 Chirongui' },
-                  { icon: <Phone size={14} />,      text: '+33 672 75 84 78' },
-                  { icon: <CreditCard size={14} />, text: 'Paiement sur place' },
-                  { icon: <Store size={14} />,      text: 'Retrait en magasin' },
+                  { icon: <MapPin size={15} />,     text: '3 rue Mairie Annexe, Poroani\nQuartier 100 Villas - 97620 Chirongui' },
+                  { icon: <Phone size={15} />,      text: '+33 672 75 84 78' },
+                  { icon: <CreditCard size={15} />, text: 'Paiement sur place, CB ou espèces' },
+                  { icon: <Store size={15} />,      text: 'Retrait en magasin sans attente' },
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-stone-300 text-sm">
-                    <span className="text-primary-400 shrink-0 mt-0.5">{item.icon}</span>
-                    <span className="leading-snug whitespace-pre-line">{item.text}</span>
+                  <li key={i} className="flex items-start gap-3.5 text-stone-300 text-sm">
+                    <span className="w-8 h-8 rounded-sm bg-primary-500/15 border border-primary-500/30 text-primary-400 flex items-center justify-center shrink-0">{item.icon}</span>
+                    <span className="leading-snug whitespace-pre-line pt-1">{item.text}</span>
                   </li>
                 ))}
               </ul>
+              {/* Pied : partenaires */}
+              <div className="px-6 py-4 bg-primary-500/10 border-t border-primary-500/20">
+                <p className="text-primary-300 text-xs font-semibold tracking-wide">
+                  Partenaire de plus de 80 magasins à Mayotte
+                </p>
+              </div>
             </div>
           </div>
 
@@ -175,7 +202,7 @@ export default async function HomePage() {
             </div>
             <div className="grid grid-cols-2 gap-px" style={{ background: 'rgba(255,255,255,0.06)' }}>
               {[
-                { icon: <Clock size={14} />,      text: todayHours ? (todayHours.open ? `Ouvert\n${fmtHours(todayHours)}` : "Fermé\naujourd'hui") : 'Lun – Sam\n8h00 – 18h00' },
+                { icon: <Clock size={14} />,      text: todayHours ? (todayHours.open ? `Ouvert\n${fmtHours(todayHours)}` : "Fermé\naujourd'hui") : 'Lun - Sam\n8h00 - 18h00' },
                 { icon: <Phone size={14} />,      text: '+33 672\n75 84 78' },
                 { icon: <MapPin size={14} />,     text: 'Poroani\n97620 Chirongui' },
                 { icon: <CreditCard size={14} />, text: 'Paiement\nsur place' },
@@ -203,18 +230,20 @@ export default async function HomePage() {
             </h2>
           </div>
 
-          {/* Desktop : 4 colonnes reliees, tuiles carrees registre logistique */}
-          <div className="hidden sm:grid sm:grid-cols-4 relative">
-            <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px z-0"
-                 style={{ background: 'linear-gradient(90deg, rgba(201,161,74,0.25), rgba(201,161,74,0.55), rgba(201,161,74,0.25))' }} />
+          {/* Desktop : timeline horizontale (ronds relies, design valide) */}
+          <div className="hidden sm:grid sm:grid-cols-4 gap-0 relative">
+            <div className="hidden lg:block absolute top-11 left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] h-px z-0"
+                 style={{ background: 'linear-gradient(90deg, rgba(201,161,74,0.3), rgba(201,161,74,0.6), rgba(201,161,74,0.3))' }} />
             {steps.map((item, idx) => (
-              <div key={item.step} className={`reveal delay-${idx + 1} group relative z-10 flex flex-col items-start text-left px-6 ${idx > 0 ? 'border-l border-primary-800/10' : ''}`}>
-                <div className="w-16 h-16 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center mb-5 ring-4 transition-transform duration-300 group-hover:-translate-y-1"
-                     style={{ '--tw-ring-color': '#F7F2E8', boxShadow: '0 6px 24px rgba(10,38,24,0.24)' }}>
-                  {item.icon}
+              <div key={item.step} className={`reveal delay-${idx + 1} group relative z-10 flex flex-col items-center text-center px-4`}>
+                <div className="relative mb-5">
+                  <div className="relative z-10 w-[4.5rem] h-[4.5rem] rounded-full bg-primary-900 text-primary-400 flex items-center justify-center ring-4 transition-transform duration-300 group-hover:-translate-y-1"
+                       style={{ '--tw-ring-color': '#F7F2E8', boxShadow: '0 6px 24px rgba(10,38,24,0.28)' }}>
+                    {item.icon}
+                  </div>
                 </div>
-                <span className="text-primary-600 text-[10px] font-bold tracking-[0.22em] mb-1.5 uppercase">Étape {item.step}</span>
-                <h3 className="font-serif font-semibold text-primary-800 text-2xl mb-2">{item.title}</h3>
+                <span className="text-primary-500 text-[10px] font-bold tracking-[0.2em] mb-1.5 uppercase">Étape {item.step}</span>
+                <h3 className="font-serif font-semibold text-primary-800 text-xl mb-2">{item.title}</h3>
                 <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -285,7 +314,7 @@ export default async function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          À PROPOS — fond forêt
+          À PROPOS - fond forêt
       ══════════════════════════════════════════════════════════════ */}
       <section id="apropos" className="bg-primary-900 py-20 md:py-32">
         <div className="max-w-5xl mx-auto px-4">
@@ -468,95 +497,43 @@ export default async function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          CONTACT
+          APPEL A L'ACTION CONTACT
       ══════════════════════════════════════════════════════════════ */}
-      <section id="contact" className="bg-white py-20 md:py-28 border-t border-stone-100">
-        <div className="max-w-6xl mx-auto px-4">
+      <section id="contact" className="relative overflow-hidden bg-primary-900 py-20 md:py-28">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: "url('/images/site/apropos.jpg')" }}
+        />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(10,38,24,0.92) 0%, rgba(10,38,24,0.8) 100%)' }} />
 
-          {/* Titre */}
-          <div className="text-center mb-12 md:mb-16">
-            <span className="section-label center">Nous contacter</span>
-            <h2
-              className="font-serif font-semibold text-primary-800 leading-tight"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}
+        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+          <span className="section-label on-dark">Nous contacter</span>
+          <h2
+            className="reveal font-serif font-semibold text-white leading-tight mb-5"
+            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
+          >
+            Une question ?<br />Parlons-en directement
+          </h2>
+          <p className="reveal delay-1 text-stone-300 text-sm md:text-base mb-10 max-w-md mx-auto leading-relaxed">
+            Produit, stock, commande en gros : nous répondons en général sous 24h,
+            par téléphone, WhatsApp ou email.
+          </p>
+          <div className="reveal delay-2 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-400 active:scale-95 text-white font-semibold px-8 py-4 rounded-md text-sm transition-all shadow-gold hover:-translate-y-0.5 group"
             >
-              Contact & Infos
-            </h2>
-            <p className="mt-4 text-stone-500 text-sm max-w-md mx-auto leading-relaxed">
-              Une question sur une commande, un produit, ou autre ? Envoyez-nous un message, nous répondons rapidement.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-
-            {/* ── Colonne gauche : infos + horaires ─────────────────── */}
-            <div className="space-y-4">
-
-              {/* Cards infos */}
-              {[
-                {
-                  icon: <MapPin size={18} />,
-                  title: 'Adresse',
-                  content: <>3 rue Mairie Annexe, Poroani<br />Quartier 100 Villas — 97620 Chirongui</>,
-                },
-                {
-                  icon: <Phone size={18} />,
-                  title: 'Téléphone',
-                  content: <a href="tel:+33672758478" className="hover:text-primary-700 transition-colors">+33 672 75 84 78</a>,
-                },
-                {
-                  icon: <Mail size={18} />,
-                  title: 'Email',
-                  content: <a href="mailto:contact@chezandys.com" className="hover:text-primary-700 transition-colors">contact@chezandys.com</a>,
-                },
-              ].map((item, i) => (
-                <div key={item.title} className={`reveal delay-${i + 1} flex items-start gap-4 p-5 rounded-md border`}
-                     style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
-                  <div className="w-10 h-10 rounded-md bg-primary-900 text-primary-500 flex items-center justify-center shrink-0 mt-0.5">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-1">{item.title}</p>
-                    <p className="text-sm text-stone-700 leading-relaxed">{item.content}</p>
-                  </div>
-                </div>
-              ))}
-
-              {/* Horaires */}
-              <div className="reveal delay-4 rounded-md p-5 border"
-                   style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <div className="w-10 h-10 rounded-md bg-primary-900 text-primary-500 flex items-center justify-center shrink-0">
-                    <Clock size={18} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-stone-400 uppercase tracking-widest">Horaires</p>
-                    <p className="text-sm font-semibold text-primary-800">d&apos;ouverture</p>
-                  </div>
-                </div>
-                {hours.length > 0 ? hours.map(h => (
-                  <div key={h.day} className="flex justify-between py-2 border-b border-stone-100 last:border-0 text-sm">
-                    <span className="text-stone-500">{h.day}</span>
-                    <span className={`font-semibold ${!h.open ? 'text-stone-400' : 'text-primary-800'}`}>
-                      {fmtHours(h)}
-                    </span>
-                  </div>
-                )) : (
-                  <p className="text-sm text-stone-500">Lun – Sam : 8h00 – 18h00</p>
-                )}
-              </div>
-            </div>
-
-            {/* ── Colonne droite : formulaire ───────────────────────── */}
-            <div className="reveal delay-2 rounded-md border p-7 md:p-9 shadow-card"
-                 style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.18)' }}>
-              <h3 className="font-serif font-semibold text-primary-800 text-xl mb-1">Envoyez-nous un message</h3>
-              <p className="text-stone-500 text-sm mb-6 leading-relaxed">
-                Réponse sous 24h en général.
-              </p>
-              <ContactForm />
-            </div>
-
+              <Mail size={15} />
+              Nous contacter
+              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+            <a
+              href="tel:+33672758478"
+              className="inline-flex items-center justify-center gap-2 glass text-white font-semibold px-8 py-4 rounded-md text-sm hover:bg-white/15 active:scale-95 transition-all"
+            >
+              <Phone size={15} />
+              06 72 75 84 78
+            </a>
           </div>
         </div>
       </section>

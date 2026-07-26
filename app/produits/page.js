@@ -174,7 +174,7 @@ export default function ProduitsPage() {
           </>
         ) : (
           <div className="text-center py-28" role="status" aria-live="polite">
-            <p className="text-4xl mb-5 opacity-15" aria-hidden="true">—</p>
+            <p className="text-4xl mb-5 opacity-15" aria-hidden="true">-</p>
             <p className="font-serif text-2xl text-primary-800 mb-2">Aucun produit trouvé</p>
             <p className="text-sm text-stone-400 mb-6">Essayez un autre mot-clé ou une autre catégorie</p>
             {hasActiveFilter && (
