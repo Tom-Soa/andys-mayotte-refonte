@@ -191,9 +191,10 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
 
-            {/* Image : sous le texte sur telephone, a gauche sur ordinateur */}
+            {/* Image : colonne de gauche sur ordinateur, masquee sur
+                telephone ou elle est inseree entre les deux paragraphes */}
             <ScrollReveal
-              className="relative order-2 md:order-1"
+              className="relative hidden md:block"
               variants={{
                 hidden: { opacity: 0, x: -48, scale: 0.96 },
                 visible: { opacity: 1, x: 0, scale: 1 },
@@ -201,7 +202,7 @@ export default async function HomePage() {
               transition={{ duration: 0.9, ease: EASE }}
               viewOptions={{ amount: 0.2, margin: '-8% 0px -8% 0px' }}
             >
-              <div className="group relative rounded-md overflow-hidden shadow-forest h-56 sm:h-72 md:h-[34rem]">
+              <div className="group relative rounded-md overflow-hidden shadow-forest h-[34rem]">
                 <img
                   src="/images/site/apropos.jpg"
                   alt="Entrepôt Chez Andy's"
@@ -212,7 +213,6 @@ export default async function HomePage() {
 
             {/* Texte, arrivee laterale opposee */}
             <ScrollReveal
-              className="order-1 md:order-2"
               variants={{
                 hidden: { opacity: 0, x: 48 },
                 visible: { opacity: 1, x: 0 },
@@ -233,6 +233,16 @@ export default async function HomePage() {
                 Basé à Poroani, Andy&apos;s approvisionne professionnels et particuliers
                 en produits alimentaires : boissons, épicerie, conserves, céréales.
               </p>
+
+              {/* Telephone : l'image s'intercale entre les deux paragraphes */}
+              <div className="md:hidden group relative rounded-md overflow-hidden shadow-forest h-56 my-7">
+                <img
+                  src="/images/site/apropos.jpg"
+                  alt="Entrepôt Chez Andy's"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
               <p className="text-stone-400 leading-relaxed mb-9 text-base max-w-md">
                 Préparez votre commande depuis chez vous, choisissez votre créneau,
                 et repartez sans attendre.

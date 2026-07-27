@@ -77,12 +77,12 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
           transition={{ duration: 0.7, delay: 0.7, ease: EASE }}
           className="flex flex-col sm:flex-row gap-3 justify-center"
         >
-          <Link href="/produits" className="btn-primary group">
+          <Link href="/produits" className="btn-primary btn-sm group">
             <ShoppingBag size={16} className="shrink-0" />
             Voir le catalogue
             <ArrowRight size={15} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-          <Link href="/reservation" className="btn-outline group">
+          <Link href="/reservation" className="btn-outline btn-sm group">
             <CalendarCheck size={16} className="shrink-0" />
             Réserver un créneau
           </Link>
@@ -125,7 +125,7 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
                     <img
                       src={p.image}
                       alt={p.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+                      className="w-full h-full object-contain transition-transform duration-500 group-hover/card:scale-105"
                     />
                   </div>
 
