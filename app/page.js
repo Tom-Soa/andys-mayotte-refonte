@@ -3,7 +3,8 @@ import { sql } from '@/lib/db'
 import ProductCard from '@/components/ProductCard'
 import ReviewForm from '@/components/ReviewForm'
 import Hero from '@/components/Hero'
-import { Reveal, Stagger, StaggerItem, HoverLift } from '@/components/motion/Primitives'
+import { Reveal, Stagger, StaggerItem, HoverLift, EASE } from '@/components/motion/Primitives'
+import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import fallbackProducts from '@/data/products.json'
 import { faqItems, faqJsonLd } from '@/data/faq'
 import {
@@ -190,8 +191,16 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
 
-            {/* Image, plus haute pour equilibrer le texte */}
-            <Reveal className="relative" y={34}>
+            {/* Image, arrivee laterale avec leger zoom (ScrollReveal 21st.dev) */}
+            <ScrollReveal
+              className="relative"
+              variants={{
+                hidden: { opacity: 0, x: -48, scale: 0.96 },
+                visible: { opacity: 1, x: 0, scale: 1 },
+              }}
+              transition={{ duration: 0.9, ease: EASE }}
+              viewOptions={{ once: true, amount: 0.25 }}
+            >
               <div className="group relative rounded-md overflow-hidden shadow-forest h-[22rem] md:h-[34rem]">
                 <img
                   src="/images/site/apropos.jpg"
@@ -199,10 +208,17 @@ export default async function HomePage() {
                   className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                 />
               </div>
-            </Reveal>
+            </ScrollReveal>
 
-            {/* Texte */}
-            <Reveal delay={0.15} y={28}>
+            {/* Texte, arrivee laterale opposee */}
+            <ScrollReveal
+              variants={{
+                hidden: { opacity: 0, x: 48 },
+                visible: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
+              viewOptions={{ once: true, amount: 0.25 }}
+            >
               <span className="section-label on-dark">
                 À propos
               </span>
@@ -238,7 +254,7 @@ export default async function HomePage() {
                 Découvrir Chez Andy&apos;s
                 <ArrowRight size={15} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-            </Reveal>
+            </ScrollReveal>
           </div>
         </div>
       </section>
