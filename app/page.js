@@ -211,8 +211,9 @@ export default async function HomePage() {
               </div>
             </ScrollReveal>
 
-            {/* Texte, arrivee laterale opposee */}
+            {/* Texte : centre sur telephone, aligne a gauche sur ordinateur */}
             <ScrollReveal
+              className="text-center md:text-left"
               variants={{
                 hidden: { opacity: 0, x: 48 },
                 visible: { opacity: 1, x: 0 },
@@ -229,7 +230,7 @@ export default async function HomePage() {
               >
                 Andy&apos;s, votre<br />partenaire alimentaire
               </h2>
-              <p className="text-stone-300 leading-relaxed mb-5 text-base max-w-md">
+              <p className="text-stone-300 leading-relaxed mb-5 text-base max-w-md mx-auto md:mx-0">
                 Basé à Poroani, Andy&apos;s approvisionne professionnels et particuliers
                 en produits alimentaires : boissons, épicerie, conserves, céréales.
               </p>
@@ -243,12 +244,12 @@ export default async function HomePage() {
                 />
               </div>
 
-              <p className="text-stone-400 leading-relaxed mb-9 text-base max-w-md">
+              <p className="text-stone-400 leading-relaxed mb-9 text-base max-w-md mx-auto md:mx-0">
                 Préparez votre commande depuis chez vous, choisissez votre créneau,
                 et repartez sans attendre.
               </p>
 
-              <ul className="space-y-3.5 mb-10">
+              <ul className="space-y-3.5 mb-10 inline-block text-left md:block">
                 {[
                   'Réservation en ligne, sans frais',
                   'Paiement sur place à la récupération',

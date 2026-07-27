@@ -21,13 +21,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
-    /* Aucun debordement lateral possible : un element trop large ne doit
-       jamais rendre la page scrollable vers la droite sur telephone */
-    overflow-x: hidden;
-  }
-  body {
-    overflow-x: hidden;
-    max-width: 100vw;
+    /* JAMAIS overflow-x: hidden ici ni sur body : cela casse
+       position: sticky du header. Le debordement lateral est contenu
+       section par section via overflow-clip-margin plus bas. */
   }
   body {
     font-family: 'DM Sans', system-ui, sans-serif;
@@ -137,6 +133,13 @@
   }
   /* compat ancienne classe */
   .section-label.center { justify-content: center; }
+
+  /* Un inline-flex ne suit pas text-align : on le recentre explicitement
+     quand son parent est centre. */
+  .text-center > .section-label { margin-left: auto; margin-right: auto; }
+  @media (min-width: 768px) {
+    .md\:text-left > .section-label { margin-left: 0; margin-right: 0; }
+  }
 
   /* ── Boutons : reflet qui traverse au survol ──────────────── */
   .btn-primary,
@@ -263,6 +266,13 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .marquee-track { animation: none; }
+  }
+
+  /* Chaque section contient son propre debordement lateral.
+     Cette approche remplace overflow-x: hidden sur html/body, qui
+     empechait le header sticky de fonctionner. */
+  .no-x-overflow {
+    overflow-x: clip;
   }
 
   /* ── Hero video : hauteur stable iOS + cadrage par transform ── */
