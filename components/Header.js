@@ -56,10 +56,10 @@ export default function Header() {
 
   /* Barre basse mobile : WhatsApp integre, burger en dernier */
   const bottomNav = [
-    { href: '/',         icon: <Home size={21} />,         label: 'Accueil' },
-    { href: '/produits', icon: <Package size={21} />,      label: 'Produits' },
-    { href: '/panier',   icon: <ShoppingCart size={21} />, label: 'Panier', badge: totalItems },
-    { href: 'https://wa.me/33672758478', icon: <WhatsAppIcon />, label: 'WhatsApp', external: true, whatsapp: true },
+    { href: '/',         icon: <Home size={22} />,         label: 'Accueil' },
+    { href: '/produits', icon: <Package size={22} />,      label: 'Produits' },
+    { href: '/panier',   icon: <ShoppingCart size={22} />, label: 'Panier', badge: totalItems },
+    { href: 'https://wa.me/33672758478', icon: <WhatsAppIcon size={22} />, label: 'WhatsApp', external: true, whatsapp: true },
   ]
 
   /* Liens du menu mobile (bottom sheet) */
@@ -223,15 +223,15 @@ export default function Header() {
 
       {/* Barre de navigation mobile fixee en bas */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-primary-900 border-t border-white/10 safe-pb shadow-[0_-4px_18px_rgba(6,23,16,0.45)]">
-        <div className="grid grid-cols-5 h-16">
+        <div className="grid grid-cols-5 h-[4.75rem]">
           {bottomNav.map(item => {
             const active = !item.external && isActive(item.href)
-            const cls = `relative flex flex-col items-center justify-center gap-1 transition-colors ${
+            const cls = `relative flex flex-col items-center justify-center gap-1.5 transition-colors ${
               item.whatsapp
                 ? 'text-[#25D366] hover:text-[#4be284]'
                 : active
                   ? 'text-primary-400'
-                  : 'text-stone-500 hover:text-primary-400 active:text-primary-300'
+                  : 'text-white hover:text-primary-400 active:text-primary-300'
             }`
             const inner = (
               <>
@@ -243,7 +243,7 @@ export default function Header() {
                     </span>
                   )}
                 </span>
-                <span className="text-[10px] font-medium leading-none">{item.label}</span>
+                <span className="text-[11px] font-medium leading-none">{item.label}</span>
                 {active && <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-primary-500" />}
               </>
             )
@@ -261,14 +261,14 @@ export default function Header() {
           {/* Burger : ouvre le bottom sheet */}
           <button
             onClick={() => setSheetOpen(o => !o)}
-            className={`relative flex flex-col items-center justify-center gap-1 transition-colors ${
-              sheetOpen ? 'text-primary-400' : 'text-stone-500 hover:text-primary-400 active:text-primary-300'
+            className={`relative flex flex-col items-center justify-center gap-1.5 transition-colors ${
+              sheetOpen ? 'text-primary-400' : 'text-white hover:text-primary-400 active:text-primary-300'
             }`}
             aria-label="Menu"
             aria-expanded={sheetOpen}
           >
-            {sheetOpen ? <X size={21} /> : <Menu size={21} />}
-            <span className="text-[10px] font-medium leading-none">Menu</span>
+            {sheetOpen ? <X size={22} /> : <Menu size={22} />}
+            <span className="text-[11px] font-medium leading-none">Menu</span>
           </button>
         </div>
       </nav>

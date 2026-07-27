@@ -21,6 +21,13 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Aucun debordement lateral possible : un element trop large ne doit
+       jamais rendre la page scrollable vers la droite sur telephone */
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   body {
     font-family: 'DM Sans', system-ui, sans-serif;
@@ -273,7 +280,7 @@
 
   /* ── Safe area iPhone / notch ───────────────────────────────── */
   .safe-pb { padding-bottom: env(safe-area-inset-bottom, 0px); }
-  .pb-nav  { padding-bottom: calc(4rem + env(safe-area-inset-bottom, 8px)); }
+  .pb-nav  { padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 8px)); }
 
   /* ── Glassmorphism ─────────────────────────────────────────── */
   .glass {

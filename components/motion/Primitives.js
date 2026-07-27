@@ -91,22 +91,25 @@ export function WordsReveal({ text, className, wordClassName, delay = 0, highlig
       aria-label={text}
     >
       {words.map((word, i) => (
-        <motion.span
-          key={`${word}-${i}`}
-          className={`inline-block ${highlight.includes(i) ? wordClassName || '' : ''}`}
-          variants={{
-            hidden: { opacity: 0, y: reduce ? 0 : '38%', filter: reduce ? 'none' : 'blur(6px)' },
-            visible: {
-              opacity: 1,
-              y: '0%',
-              filter: 'blur(0px)',
-              transition: { duration: reduce ? 0 : 0.9, ease: EASE },
-            },
-          }}
-        >
-          {word}
+        <span key={`${word}-${i}`}>
+          <motion.span
+            className={`inline-block ${highlight.includes(i) ? wordClassName || '' : ''}`}
+            variants={{
+              hidden: { opacity: 0, y: reduce ? 0 : '38%', filter: reduce ? 'none' : 'blur(6px)' },
+              visible: {
+                opacity: 1,
+                y: '0%',
+                filter: 'blur(0px)',
+                transition: { duration: reduce ? 0 : 0.9, ease: EASE },
+              },
+            }}
+          >
+            {word}
+          </motion.span>
+          {/* Espace hors du bloc anime : un inline-block avale l'espace
+              qu'il contient, ce qui collait les mots entre eux */}
           {i < words.length - 1 && ' '}
-        </motion.span>
+        </span>
       ))}
     </motion.span>
   )

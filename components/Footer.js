@@ -13,7 +13,7 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer className="bg-primary-900 text-stone-300">
+    <footer className="bg-primary-900 text-stone-300 pb-nav md:pb-0">
 
       {/* ── Corps du footer ────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-4 pt-14 pb-10">

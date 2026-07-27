@@ -28,31 +28,30 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 pt-16 pb-12 md:pt-24 md:pb-16 text-center">
 
-        {/* Statut du magasin */}
+        {/* Statut du magasin : pastille lisible, texte en taille normale */}
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="inline-flex items-center gap-4 mb-8 text-[11px] font-semibold tracking-[0.2em] uppercase"
+          className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mb-8 rounded-full border border-stone-200 bg-white/85 px-4 py-2 shadow-sm"
         >
-          <span className="inline-flex items-center gap-2 text-primary-800">
+          <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-primary-800">
             <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500' : 'bg-stone-400'}`} />
             {isOpen ? 'Ouvert' : 'Fermé'}
           </span>
-          <span className="w-px h-3 bg-stone-200" />
-          <span className="text-stone-400">{statusLabel}</span>
-          <span className="w-px h-3 bg-stone-200 hidden sm:block" />
-          <span className="hidden sm:inline-flex items-center gap-1.5 text-stone-400">
-            <MapPin size={11} strokeWidth={2.5} />
+          <span className="w-px h-3.5 bg-stone-200" />
+          <span className="text-[13px] font-medium text-stone-600">{statusLabel}</span>
+          <span className="w-px h-3.5 bg-stone-200 hidden sm:block" />
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-[13px] font-medium text-stone-600">
+            <MapPin size={13} strokeWidth={2.2} className="text-primary-500" />
             Poroani
           </span>
         </motion.div>
 
-        {/* Titre : padding vertical genereux pour que les jambages
-            de la police manuscrite ne soient jamais coupes */}
+        {/* Titre en serif, comme les titres de sections */}
         <h1
-          className="font-script text-primary-800 mb-7"
-          style={{ fontSize: 'clamp(2.7rem, 8vw, 5.5rem)', fontWeight: 700, lineHeight: 1.35 }}
+          className="font-serif font-semibold text-primary-800 mb-7"
+          style={{ fontSize: 'clamp(2.4rem, 7vw, 4.75rem)', lineHeight: 1.08 }}
         >
           <WordsReveal
             text="Votre grossiste alimentaire"
@@ -126,7 +125,7 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
                     <img
                       src={p.image}
                       alt={p.name}
-                      className="w-full h-full object-contain p-3 transition-transform duration-500 group-hover/card:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
                     />
                   </div>
 

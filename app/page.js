@@ -130,8 +130,8 @@ export default async function HomePage() {
             <div className="space-y-11">
               {steps.map(item => (
                 <StaggerItem key={item.step} className="relative">
-                  <div className="absolute -left-[4.25rem] top-0 w-[3.25rem] h-[3.25rem] rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center"
-                       style={{ boxShadow: '0 4px 16px rgba(10,38,24,0.24)' }}>
+                  <div className="absolute -left-[4.25rem] top-0 w-[3.25rem] h-[3.25rem] rounded-full bg-primary-900 text-primary-400 flex items-center justify-center ring-4"
+                       style={{ '--tw-ring-color': '#F7F2E8', boxShadow: '0 4px 16px rgba(10,38,24,0.24)' }}>
                     {item.icon}
                   </div>
                   <span className="block text-primary-600 text-[10px] font-bold tracking-[0.22em] uppercase mb-1">Étape {item.step}</span>
@@ -189,19 +189,19 @@ export default async function HomePage() {
       ══════════════════════════════════════════════════════════════ */}
       <section id="apropos" className="bg-primary-900 py-24 md:py-36">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
 
-            {/* Image, arrivee laterale avec leger zoom (ScrollReveal 21st.dev) */}
+            {/* Image : sous le texte sur telephone, a gauche sur ordinateur */}
             <ScrollReveal
-              className="relative"
+              className="relative order-2 md:order-1"
               variants={{
                 hidden: { opacity: 0, x: -48, scale: 0.96 },
                 visible: { opacity: 1, x: 0, scale: 1 },
               }}
               transition={{ duration: 0.9, ease: EASE }}
-              viewOptions={{ amount: 0.25, margin: '-8% 0px -8% 0px' }}
+              viewOptions={{ amount: 0.2, margin: '-8% 0px -8% 0px' }}
             >
-              <div className="group relative rounded-md overflow-hidden shadow-forest h-[22rem] md:h-[34rem]">
+              <div className="group relative rounded-md overflow-hidden shadow-forest h-56 sm:h-72 md:h-[34rem]">
                 <img
                   src="/images/site/apropos.jpg"
                   alt="Entrepôt Chez Andy's"
@@ -212,12 +212,13 @@ export default async function HomePage() {
 
             {/* Texte, arrivee laterale opposee */}
             <ScrollReveal
+              className="order-1 md:order-2"
               variants={{
                 hidden: { opacity: 0, x: 48 },
                 visible: { opacity: 1, x: 0 },
               }}
               transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
-              viewOptions={{ amount: 0.25, margin: '-8% 0px -8% 0px' }}
+              viewOptions={{ amount: 0.2, margin: '-8% 0px -8% 0px' }}
             >
               <span className="section-label on-dark">
                 À propos
@@ -226,7 +227,7 @@ export default async function HomePage() {
                 className="font-serif font-semibold text-white leading-tight mb-6"
                 style={{ fontSize: 'clamp(2rem, 4.8vw, 3.25rem)' }}
               >
-                Andy&apos;s,<br />votre partenaire<br />alimentaire
+                Andy&apos;s, votre<br />partenaire alimentaire
               </h2>
               <p className="text-stone-300 leading-relaxed mb-5 text-base max-w-md">
                 Basé à Poroani, Andy&apos;s approvisionne professionnels et particuliers
@@ -299,10 +300,16 @@ export default async function HomePage() {
           <Stagger className="space-y-3" stagger={0.08}>
             {faqItems.slice(0, 4).map((item, i) => (
               <StaggerItem key={i} y={16}>
-                <details className="group bg-stone-50/60 border border-stone-200 rounded-md px-5 py-4 transition-colors hover:border-primary-300">
+                {/* Contour discret, filet dore qui apparait a l'ouverture */}
+                <details className="group relative overflow-hidden rounded-md border border-stone-200/90 bg-white px-5 py-4 transition-all duration-300 hover:border-primary-400/60 hover:shadow-card open:border-primary-400/70 open:bg-stone-50/50 open:shadow-card">
+                  <span
+                    className="absolute left-0 top-0 bottom-0 w-[3px] scale-y-0 group-open:scale-y-100 origin-top transition-transform duration-400"
+                    style={{ background: 'linear-gradient(180deg, #C9A14A, rgba(201,161,74,0.25))' }}
+                    aria-hidden="true"
+                  />
                   <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-serif font-semibold text-primary-800 text-base md:text-lg">
                     <span>{item.q}</span>
-                    <span className="text-primary-500 transition-transform duration-300 group-open:rotate-45 select-none mt-1" aria-hidden>+</span>
+                    <span className="shrink-0 mt-0.5 w-6 h-6 rounded-full border border-primary-400/40 text-primary-500 flex items-center justify-center text-sm leading-none transition-all duration-300 group-open:rotate-45 group-open:bg-primary-500 group-open:text-white group-open:border-primary-500" aria-hidden>+</span>
                   </summary>
                   <p className="mt-3 text-stone-600 text-sm md:text-base leading-relaxed">
                     {item.a}

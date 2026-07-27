@@ -107,7 +107,10 @@ export default function RootLayout({ children }) {
           <ScrollProgress />
           <TopBanner />
           <Header />
-          <main className="flex-1 pb-nav md:pb-0">
+          {/* Pas de padding bas ici : il creerait une bande blanche entre la
+              derniere section et le footer. La compensation de la barre de
+              navigation mobile est portee par le footer lui-meme. */}
+          <main className="flex-1">
             {children}
           </main>
           <Footer />

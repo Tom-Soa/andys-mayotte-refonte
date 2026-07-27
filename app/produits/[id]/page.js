@@ -165,7 +165,7 @@ export default async function ProductPage({ params }) {
                 <img
                   src={p.image}
                   alt={p.name}
-                  className="w-full h-full object-contain p-6"
+                  className="w-full h-full object-cover"
                 />
               ) : (
                 <div
