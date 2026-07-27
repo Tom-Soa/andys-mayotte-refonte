@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import initialProducts from '@/data/products.json'
 import ProductCard from '@/components/ProductCard'
 import { ProductGridSkeleton } from '@/components/Skeleton'
+import { Stagger, StaggerItem } from '@/components/motion/Primitives'
 import { Search, SlidersHorizontal, X } from 'lucide-react'
 
 export default function ProduitsPage() {
@@ -160,17 +161,17 @@ export default function ProduitsPage() {
               {selectedCat !== 'Tous' && ` dans "${selectedCat}"`}
               {search && ` pour "${search}"`}
             </p>
-            <div
+            <Stagger
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6 items-stretch"
-              role="list"
-              aria-label="Catalogue produits"
+              stagger={0.05}
+              amount={0.02}
             >
               {filtered.map(product => (
-                <div key={product.id} role="listitem" className="h-full">
+                <StaggerItem key={product.id} className="h-full" y={22}>
                   <ProductCard product={product} />
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </>
         ) : (
           <div className="text-center py-28" role="status" aria-live="polite">

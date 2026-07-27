@@ -1,6 +1,7 @@
 import { sql } from '@/lib/db'
 import ContactForm from '@/components/ContactForm'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Primitives'
 
 export const metadata = {
   title: 'Contact et horaires',
@@ -62,24 +63,27 @@ export default async function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
 
           {/* Coordonnees + horaires */}
-          <div className="space-y-4">
-            {infos.map((info, i) => (
-              <div key={info.titre} className="flex items-start gap-4 p-5 rounded-md border" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
-                <span className="w-10 h-10 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center shrink-0">
-                  {info.icon}
-                </span>
-                <div>
-                  <p className="font-semibold text-primary-800 text-sm mb-0.5">{info.titre}</p>
-                  {info.lignes.map(l => (
-                    info.href
-                      ? <a key={l} href={info.href} className="block text-stone-600 text-sm hover:text-primary-600 transition-colors">{l}</a>
-                      : <p key={l} className="text-stone-600 text-sm">{l}</p>
-                  ))}
+          <Stagger className="space-y-4" stagger={0.1}>
+            {infos.map(info => (
+              <StaggerItem key={info.titre}>
+                <div className="group flex items-start gap-4 p-5 rounded-md border transition-colors hover:border-primary-400/50" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
+                  <span className="w-10 h-10 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5">
+                    {info.icon}
+                  </span>
+                  <div>
+                    <p className="font-semibold text-primary-800 text-sm mb-0.5">{info.titre}</p>
+                    {info.lignes.map(l => (
+                      info.href
+                        ? <a key={l} href={info.href} className="block text-stone-600 text-sm hover:text-primary-600 transition-colors">{l}</a>
+                        : <p key={l} className="text-stone-600 text-sm">{l}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
 
             {/* Horaires */}
+            <StaggerItem>
             <div className="p-5 rounded-md border" style={{ background: '#F9F5EE', borderColor: 'rgba(201,161,74,0.18)' }}>
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-10 h-10 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center shrink-0">
@@ -102,16 +106,19 @@ export default async function ContactPage() {
                 <p className="text-stone-600 text-sm">Lundi au samedi : 8h00 - 18h00</p>
               )}
             </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
 
           {/* Formulaire */}
-          <div className="rounded-md border p-7 md:p-9 shadow-card" style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.18)' }}>
-            <h2 className="font-serif font-semibold text-primary-800 text-xl md:text-2xl mb-1.5">
-              Envoyez-nous un message
-            </h2>
-            <p className="text-stone-500 text-sm mb-6">Réponse sous 24h en général.</p>
-            <ContactForm />
-          </div>
+          <Reveal delay={0.15} y={28}>
+            <div className="rounded-md border p-7 md:p-9 shadow-card" style={{ background: '#FDFAF5', borderColor: 'rgba(201,161,74,0.18)' }}>
+              <h2 className="font-serif font-semibold text-primary-800 text-xl md:text-2xl mb-1.5">
+                Envoyez-nous un message
+              </h2>
+              <p className="text-stone-500 text-sm mb-6">Réponse sous 24h en général.</p>
+              <ContactForm />
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>

@@ -58,7 +58,12 @@ export function StaggerItem({ children, className, y = 20 }) {
   )
 }
 
-/* Titre revele mot par mot */
+/*
+ * Titre revele mot par mot.
+ * Les mots montent en fondu sans masque de decoupe : une police
+ * manuscrite a des jambages qui depassent de la ligne et seraient
+ * rognes par un overflow: hidden.
+ */
 export function WordsReveal({ text, className, wordClassName, delay = 0, highlight = [] }) {
   const reduce = useReducedMotion()
   const words = text.split(' ')
@@ -69,23 +74,27 @@ export function WordsReveal({ text, className, wordClassName, delay = 0, highlig
       animate="visible"
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: reduce ? 0 : 0.08, delayChildren: reduce ? 0 : delay } },
+        visible: { transition: { staggerChildren: reduce ? 0 : 0.09, delayChildren: reduce ? 0 : delay } },
       }}
       aria-label={text}
     >
       {words.map((word, i) => (
-        <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom">
-          <motion.span
-            className={`inline-block ${highlight.includes(i) ? wordClassName || '' : ''}`}
-            variants={{
-              hidden: { y: reduce ? 0 : '110%', opacity: reduce ? 0 : 1 },
-              visible: { y: '0%', opacity: 1, transition: { duration: reduce ? 0 : 0.85, ease: EASE } },
-            }}
-          >
-            {word}
-          </motion.span>
-          {i < words.length - 1 && <span>&nbsp;</span>}
-        </span>
+        <motion.span
+          key={`${word}-${i}`}
+          className={`inline-block ${highlight.includes(i) ? wordClassName || '' : ''}`}
+          variants={{
+            hidden: { opacity: 0, y: reduce ? 0 : '38%', filter: reduce ? 'none' : 'blur(6px)' },
+            visible: {
+              opacity: 1,
+              y: '0%',
+              filter: 'blur(0px)',
+              transition: { duration: reduce ? 0 : 0.9, ease: EASE },
+            },
+          }}
+        >
+          {word}
+          {i < words.length - 1 && ' '}
+        </motion.span>
       ))}
     </motion.span>
   )

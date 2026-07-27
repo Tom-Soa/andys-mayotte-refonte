@@ -1,43 +1,34 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ShoppingBag, CalendarCheck, ArrowRight, MapPin } from 'lucide-react'
 import { WordsReveal, EASE } from '@/components/motion/Primitives'
+import HeroTexture from '@/components/HeroTexture'
 
 /*
- * Hero inspire du modele "Animated Marquee Hero" de 21st.dev :
- * titre revele mot par mot, puis bandeau d'images produits qui defile
- * en continu sous le contenu. Fond blanc, registre sobre.
+ * Hero : titre revele mot par mot, puis carrousel des produits reellement
+ * en vente. Chaque vignette est un lien vers la fiche produit et porte son
+ * prix ainsi qu'un bouton "Voir la fiche".
  */
 export default function Hero({ statusLabel, isOpen, products = [] }) {
   const reduce = useReducedMotion()
+  /* Le defilement se met en pause au survol pour permettre le clic */
+  const [paused, setPaused] = useState(false)
 
-  /* Visuels du carrousel : photos produits, completees par les photos du site */
-  const visuals = [
-    ...products.filter(p => p.image).map(p => ({ src: p.image, label: p.name })),
-    { src: '/images/site/hero.jpg', label: 'Notre entrepôt à Poroani' },
-    { src: '/images/site/apropos.jpg', label: 'Le magasin' },
-  ].slice(0, 8)
-
-  const strip = [...visuals, ...visuals]
+  /* Uniquement des produits vendus, avec visuel */
+  const catalogue = products.filter(p => p.image && p.available !== false)
+  /* Duplique la liste pour une boucle sans couture */
+  const strip = catalogue.length > 0 ? [...catalogue, ...catalogue] : []
 
   return (
     <section className="relative bg-white overflow-hidden">
-      {/* Trame tres legere en fond, apporte de la matiere sans couleur */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.55]"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(20,61,44,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(20,61,44,0.045) 1px, transparent 1px)',
-          backgroundSize: '56px 56px',
-          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%)',
-        }}
-      />
+      <HeroTexture />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 pt-16 pb-10 md:pt-24 md:pb-14 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 pt-16 pb-12 md:pt-24 md:pb-16 text-center">
 
-        {/* Statut du magasin, en direct */}
+        {/* Statut du magasin */}
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,16 +36,7 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
           className="inline-flex items-center gap-4 mb-8 text-[11px] font-semibold tracking-[0.2em] uppercase"
         >
           <span className="inline-flex items-center gap-2 text-primary-800">
-            <span className="relative flex w-2 h-2">
-              {isOpen && !reduce && (
-                <motion.span
-                  className="absolute inset-0 rounded-full bg-emerald-500"
-                  animate={{ scale: [1, 2.2], opacity: [0.55, 0] }}
-                  transition={{ duration: 1.9, repeat: Infinity, ease: 'easeOut' }}
-                />
-              )}
-              <span className={`relative w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500' : 'bg-stone-400'}`} />
-            </span>
+            <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500' : 'bg-stone-400'}`} />
             {isOpen ? 'Ouvert' : 'Fermé'}
           </span>
           <span className="w-px h-3 bg-stone-200" />
@@ -66,10 +48,11 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
           </span>
         </motion.div>
 
-        {/* Titre revele mot par mot, police signature du logo */}
+        {/* Titre : padding vertical genereux pour que les jambages
+            de la police manuscrite ne soient jamais coupes */}
         <h1
-          className="font-script text-primary-800 leading-[1.05] mb-7"
-          style={{ fontSize: 'clamp(2.7rem, 8vw, 5.5rem)', fontWeight: 700 }}
+          className="font-script text-primary-800 mb-7"
+          style={{ fontSize: 'clamp(2.7rem, 8vw, 5.5rem)', fontWeight: 700, lineHeight: 1.35 }}
         >
           <WordsReveal
             text="Votre grossiste alimentaire"
@@ -107,39 +90,70 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
         </motion.div>
       </div>
 
-      {/* Bandeau d'images qui defile en continu */}
-      <motion.div
-        initial={{ opacity: 0, y: reduce ? 0 : 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.85, ease: EASE }}
-        className="relative z-10 pb-14 md:pb-20"
-      >
-        <div className="relative overflow-hidden">
-          {/* Fondus lateraux */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-40 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-40 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
-
-          <motion.div
-            className="flex gap-4 md:gap-5 w-max"
-            animate={reduce ? {} : { x: ['0%', '-50%'] }}
-            transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
+      {/* Carrousel des produits en vente */}
+      {strip.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: reduce ? 0 : 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.85, ease: EASE }}
+          className="relative z-10 pb-16 md:pb-24"
+        >
+          <div
+            className="relative overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
           >
-            {strip.map((v, i) => (
-              <div
-                key={`${v.src}-${i}`}
-                className="group relative shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-md overflow-hidden bg-cream-100 border border-stone-100"
-              >
-                <img
-                  src={v.src}
-                  alt=""
-                  aria-hidden="true"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.div>
+            {/* Fondus lateraux */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 z-20 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 z-20 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+
+            <motion.div
+              className="flex gap-4 md:gap-5 w-max px-4"
+              animate={reduce || paused ? {} : { x: ['0%', '-50%'] }}
+              transition={{ duration: 52, repeat: Infinity, ease: 'linear' }}
+              style={{ willChange: 'transform' }}
+            >
+              {strip.map((p, i) => (
+                <Link
+                  key={`${p.id}-${i}`}
+                  href={`/produits/${p.id}`}
+                  className="group/card relative shrink-0 w-44 md:w-60 bg-white rounded-md overflow-hidden border border-stone-150 shadow-card hover:shadow-hover hover:-translate-y-1.5 transition-all duration-300"
+                  style={{ borderColor: 'rgba(28,24,20,0.08)' }}
+                >
+                  {/* Visuel, produit entier visible */}
+                  <div className="h-28 md:h-36 bg-cream-50 flex items-center justify-center overflow-hidden">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-contain p-3 transition-transform duration-500 group-hover/card:scale-105"
+                    />
+                  </div>
+
+                  {/* Nom, prix, appel a l'action */}
+                  <div className="px-3.5 pt-3 pb-3.5 text-left">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary-600 mb-1">
+                      {p.category}
+                    </p>
+                    <p className="font-semibold text-primary-800 text-[13px] leading-snug line-clamp-1 mb-2">
+                      {p.name}
+                    </p>
+                    <div className="flex items-baseline gap-1 mb-3">
+                      <span className="font-bold text-primary-500 text-base">
+                        {parseFloat(p.price).toFixed(2)} €
+                      </span>
+                      {p.unit && <span className="text-[11px] text-stone-400">/ {p.unit}</span>}
+                    </div>
+                    <span className="flex items-center justify-center gap-1.5 w-full py-2 rounded-sm bg-primary-900 group-hover/card:bg-primary-500 text-white text-[11px] font-semibold tracking-wide transition-colors duration-300">
+                      Voir la fiche
+                      <ArrowRight size={12} className="transition-transform duration-300 group-hover/card:translate-x-0.5" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
     </section>
   )
 }

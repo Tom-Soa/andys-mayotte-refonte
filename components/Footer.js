@@ -155,7 +155,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-primary-500/90 hover:text-primary-400 font-medium transition-colors"
             >
-              FondationStudio.fr
+              ACTCStudio.fr
             </a>
           </p>
         </div>

@@ -4,6 +4,7 @@ import { sql } from '@/lib/db'
 import AddToCartButton from '@/components/AddToCartButton'
 import ProductCard from '@/components/ProductCard'
 import fallbackProducts from '@/data/products.json'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Primitives'
 import { ArrowLeft, Tag, Package } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
@@ -154,8 +155,8 @@ export default async function ProductPage({ params }) {
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-          {/* ── Colonne image ──────────────────────────────────── */}
-          <div className="relative">
+          {/* Colonne image */}
+          <Reveal className="relative" y={26}>
             <div
               className="relative rounded-md overflow-hidden shadow-card border border-stone-100 bg-white"
               style={{ aspectRatio: '4/3' }}
@@ -195,10 +196,10 @@ export default async function ProductPage({ params }) {
                 {stockBadge.label}
               </span>
             </div>
-          </div>
+          </Reveal>
 
-          {/* ── Colonne infos ──────────────────────────────────── */}
-          <div className="flex flex-col">
+          {/* Colonne infos */}
+          <Reveal className="flex flex-col" delay={0.12} y={26}>
 
             {/* Catégorie badge */}
             {p.category && (
@@ -270,10 +271,7 @@ export default async function ProductPage({ params }) {
             {/* Bouton ajouter au panier */}
             <div className="flex flex-col sm:flex-row gap-3 items-start">
               <AddToCartButton product={p} />
-              <Link
-                href="/reservation"
-                className="inline-flex items-center justify-center gap-2 border-2 border-primary-800/60 text-primary-800 hover:bg-primary-800 hover:text-white font-semibold px-6 py-4 rounded-md text-sm transition-all active:scale-95"
-              >
+              <Link href="/reservation" className="btn-outline">
                 Réserver un créneau
               </Link>
             </div>
@@ -282,7 +280,7 @@ export default async function ProductPage({ params }) {
             <p className="mt-4 text-xs text-stone-400 leading-relaxed">
               Paiement sur place lors du retrait en magasin à Poroani.
             </p>
-          </div>
+          </Reveal>
         </div>
 
         {/* ── Vous aimerez aussi ────────────────────────────────── */}
@@ -297,13 +295,13 @@ export default async function ProductPage({ params }) {
                 Vous aimerez aussi
               </h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch">
-              {relatedProducts.map((prod, i) => (
-                <div key={prod.id} className={`reveal delay-${Math.min(i + 1, 5)} h-full`}>
+            <Stagger className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch" stagger={0.07}>
+              {relatedProducts.map(prod => (
+                <StaggerItem key={prod.id} className="h-full" y={22}>
                   <ProductCard product={prod} />
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         )}
       </div>
