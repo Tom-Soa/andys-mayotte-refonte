@@ -97,8 +97,23 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════════════════════════════
           COMMENT ÇA MARCHE
       ══════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-32" style={{ background: '#F7F2E8' }}>
-        <div className="max-w-5xl mx-auto px-4">
+      <section className="relative overflow-hidden py-20 md:py-32" style={{ background: '#F7F2E8' }}>
+        {/* Texture generee (Higgsfield) : palmes, noix de coco, riz et jute
+            a l'encre sauge et doree. Portrait sur telephone, paysage sinon. */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute inset-0 bg-cover bg-center md:hidden"
+            style={{ backgroundImage: "url('/images/site/etapes-texture-mobile.jpg')" }}
+          />
+          <div
+            className="hidden md:block absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/images/site/etapes-texture.jpg')" }}
+          />
+          {/* Voile creme : la texture reste lisible derriere le contenu */}
+          <div className="absolute inset-0" style={{ background: 'rgba(247,242,232,0.62)' }} />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4">
           <Reveal className="text-center mb-14 md:mb-18">
             <span className="section-label center">Simple & rapide</span>
             <h2 className="font-serif font-semibold text-primary-800 leading-tight"
@@ -195,17 +210,18 @@ export default async function HomePage() {
             Version portrait sur telephone, paysage sur ordinateur. */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-60 md:hidden"
+            className="absolute inset-0 bg-cover bg-center md:hidden"
             style={{ backgroundImage: "url('/images/site/apropos-texture-mobile.jpg')" }}
           />
           <div
-            className="hidden md:block absolute inset-0 bg-cover bg-center opacity-60"
+            className="hidden md:block absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url('/images/site/apropos-texture.jpg')" }}
           />
-          {/* Voile vert : conserve le contraste du texte blanc */}
+          {/* Voile leger : la texture reste franchement visible, le texte
+              blanc conserve un contraste suffisant */}
           <div
             className="absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse 75% 65% at 50% 50%, rgba(10,38,24,0.72) 0%, rgba(10,38,24,0.86) 65%, rgba(10,38,24,0.94) 100%)' }}
+            style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(10,38,24,0.28) 0%, rgba(10,38,24,0.5) 70%, rgba(10,38,24,0.66) 100%)' }}
           />
         </div>
 
@@ -321,8 +337,21 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════════════════════════════
           FAQ
       ══════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-white border-t border-stone-100">
-        <div className="max-w-3xl mx-auto px-4">
+      <section className="relative overflow-hidden py-20 md:py-28 bg-white border-t border-stone-100">
+        {/* Texture generee (Higgsfield), motifs sur les cotes, centre degage */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute inset-0 bg-cover bg-center md:hidden"
+            style={{ backgroundImage: "url('/images/site/faq-texture-mobile.jpg')" }}
+          />
+          <div
+            className="hidden md:block absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/images/site/faq-texture.jpg')" }}
+          />
+          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.58)' }} />
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4">
           <Reveal className="text-center mb-12">
             <span className="section-label center">Questions fréquentes</span>
             <h2 className="font-serif font-semibold text-primary-800" style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.75rem)' }}>
@@ -333,7 +362,7 @@ export default async function HomePage() {
             {faqItems.slice(0, 4).map((item, i) => (
               <StaggerItem key={i} y={16}>
                 {/* Contour discret, filet dore qui apparait a l'ouverture */}
-                <details className="group relative overflow-hidden rounded-md border border-stone-200/90 bg-white px-5 py-4 transition-all duration-300 hover:border-primary-400/60 hover:shadow-card open:border-primary-400/70 open:bg-stone-50/50 open:shadow-card">
+                <details className="group relative overflow-hidden rounded-md border border-stone-200/90 bg-white/95 backdrop-blur-[2px] px-5 py-4 transition-all duration-300 hover:border-primary-400/60 hover:shadow-card open:border-primary-400/70 open:bg-white open:shadow-card">
                   <span
                     className="absolute left-0 top-0 bottom-0 w-[3px] scale-y-0 group-open:scale-y-100 origin-top transition-transform duration-400"
                     style={{ background: 'linear-gradient(180deg, #C9A14A, rgba(201,161,74,0.25))' }}
