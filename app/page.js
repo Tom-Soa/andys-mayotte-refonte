@@ -109,8 +109,9 @@ export default async function HomePage() {
             className="hidden md:block absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url('/images/site/etapes-texture.jpg')" }}
           />
-          {/* Voile creme : la texture reste lisible derriere le contenu */}
-          <div className="absolute inset-0" style={{ background: 'rgba(247,242,232,0.62)' }} />
+          {/* Voile creme eclairci : le motif reste perceptible mais le texte
+              passe nettement au premier plan */}
+          <div className="absolute inset-0" style={{ background: 'rgba(250,247,240,0.82)' }} />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4">
