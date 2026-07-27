@@ -121,14 +121,14 @@ export default function AProposPage() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center mt-7">
           <Link
             href="/produits"
-            className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-forest-800 active:scale-95 text-white font-semibold px-8 py-4 rounded-md text-sm transition-all shadow-forest group"
+            className="btn-dark group"
           >
             Voir tout le catalogue
             <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 border-2 border-primary-800/50 text-primary-800 hover:bg-primary-800 hover:text-white font-semibold px-8 py-4 rounded-md text-sm transition-all"
+            className="btn-outline"
           >
             Nous contacter
           </Link>

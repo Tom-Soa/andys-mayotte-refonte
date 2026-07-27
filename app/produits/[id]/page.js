@@ -3,14 +3,16 @@ import { notFound } from 'next/navigation'
 import { sql } from '@/lib/db'
 import AddToCartButton from '@/components/AddToCartButton'
 import ProductCard from '@/components/ProductCard'
+import fallbackProducts from '@/data/products.json'
 import { ArrowLeft, Tag, Package } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
 async function fetchProduct(id) {
   const rows = await sql`SELECT * FROM products WHERE id = ${id}`.catch(() => null)
-  if (!rows || rows.length === 0) return null
-  return Array.isArray(rows) ? rows[0] : rows
+  if (rows && rows.length > 0) return Array.isArray(rows) ? rows[0] : rows
+  /* Repli sur le catalogue local quand la base n'est pas disponible */
+  return fallbackProducts.find(p => String(p.id) === String(id)) || null
 }
 
 export async function generateMetadata({ params }) {
@@ -76,11 +78,14 @@ export default async function ProductPage({ params }) {
     ],
   }
 
-  const relatedProducts = await sql`
+  const relatedFromDb = await sql`
     SELECT * FROM products
     WHERE category = ${p.category} AND id != ${p.id} AND available = true
     LIMIT 4
   `.catch(() => [])
+  const relatedProducts = relatedFromDb.length > 0
+    ? relatedFromDb
+    : fallbackProducts.filter(x => x.category === p.category && String(x.id) !== String(p.id) && x.available).slice(0, 4)
 
   const stockBadge = p.available
     ? { label: 'En stock', cls: 'bg-emerald-50 text-emerald-700 border border-emerald-100' }
@@ -152,14 +157,14 @@ export default async function ProductPage({ params }) {
           {/* ── Colonne image ──────────────────────────────────── */}
           <div className="relative">
             <div
-              className="relative rounded-md overflow-hidden shadow-card border border-stone-100"
+              className="relative rounded-md overflow-hidden shadow-card border border-stone-100 bg-white"
               style={{ aspectRatio: '4/3' }}
             >
               {p.image ? (
                 <img
                   src={p.image}
                   alt={p.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-6"
                 />
               ) : (
                 <div

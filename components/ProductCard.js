@@ -24,13 +24,13 @@ export default function ProductCard({ product }) {
   return (
     <div className="group bg-white rounded-md overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full border border-stone-100/80">
 
-      {/* Visuel produit : cliquable vers la fiche */}
+      {/* Visuel produit : cliquable vers la fiche, produit entier visible */}
       <Link href={`/produits/${product.id}`} className="relative block overflow-hidden bg-cream-100 h-44">
         {showImage ? (
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
             onError={() => setImgError(true)}
           />
         ) : (
@@ -42,11 +42,6 @@ export default function ProductCard({ product }) {
               <span className="text-4xl opacity-15">📦</span>
             )}
           </div>
-        )}
-
-        {/* Overlay bas */}
-        {showImage && (
-          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
         )}
 
         {/* Badge promo */}

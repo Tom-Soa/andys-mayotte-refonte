@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import {
   ShoppingCart, Menu, X, Home, Package,
-  CalendarCheck, Phone, ArrowRight, Info, Mail, ReceiptText, HelpCircle,
+  CalendarCheck, ArrowRight, Info, Mail, ReceiptText, HelpCircle,
 } from 'lucide-react'
 
 /* Icone WhatsApp (SVG officiel simplifie) */
@@ -104,13 +104,13 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Navigation desktop */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Navigation desktop : chaque libelle tient sur une seule ligne */}
+          <nav className="hidden md:flex items-center gap-0.5 lg:gap-1">
             {navLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3.5 py-2 rounded-lg text-[13px] font-medium tracking-wide transition-colors ${
+                className={`relative whitespace-nowrap px-2.5 lg:px-3.5 py-2 rounded-sm text-[12.5px] lg:text-[13px] font-medium tracking-wide transition-colors ${
                   isActive(link.href)
                     ? 'text-white bg-white/[0.07]'
                     : 'text-stone-300 hover:text-white hover:bg-white/[0.05]'
@@ -118,7 +118,7 @@ export default function Header() {
               >
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="absolute left-3.5 right-3.5 -bottom-px h-px bg-primary-400" />
+                  <span className="absolute left-2.5 right-2.5 lg:left-3.5 lg:right-3.5 -bottom-px h-px bg-primary-400" />
                 )}
               </Link>
             ))}
@@ -126,15 +126,6 @@ export default function Header() {
 
           {/* Actions droite */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* Telephone : desktop large uniquement */}
-            <a
-              href="tel:+33672758478"
-              className="hidden lg:flex items-center gap-2 text-stone-300 hover:text-white text-[13px] font-medium px-3 py-2 rounded-lg hover:bg-white/[0.05] transition-colors"
-            >
-              <Phone size={14} className="text-primary-400" />
-              06 72 75 84 78
-            </a>
-
             {/* Panier desktop */}
             <Link
               href="/panier"
