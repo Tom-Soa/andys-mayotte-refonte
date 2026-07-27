@@ -94,8 +94,9 @@ export default function Hero({ statusLabel, isOpen, products = [] }) {
       {strip.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.85, ease: EASE }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.1, margin: '-5% 0px -5% 0px' }}
+          transition={{ duration: 0.9, ease: EASE }}
           className="relative z-10 pb-16 md:pb-24"
         >
           <div

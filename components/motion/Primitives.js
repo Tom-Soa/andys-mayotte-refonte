@@ -6,7 +6,20 @@ import { motion, useReducedMotion } from 'framer-motion'
 export const EASE = [0.22, 1, 0.36, 1]
 export const DUR = { fast: 0.45, med: 0.7, slow: 0.9 }
 
-/* Revelation au scroll, jouee une seule fois */
+/*
+ * Toutes les animations de ce fichier sont REVERSIBLES : elles rejouent a
+ * chaque fois que l'element entre dans le viewport, et repartent en sens
+ * inverse quand il en sort. C'est le comportement obtenu en omettant
+ * `once: true` sur `viewport`, ce qui laisse Framer Motion repasser a
+ * l'etat "hidden" des que l'element quitte la zone visible.
+ *
+ * `margin` remonte la limite de declenchement pour que l'element soit
+ * deja bien engage dans l'ecran quand il apparait, et disparaisse quand il
+ * sort franchement.
+ */
+const VIEWPORT = { amount: 0.15, margin: '-8% 0px -8% 0px' }
+
+/* Revelation au scroll, rejouee a chaque passage */
 export function Reveal({ children, delay = 0, y = 24, className, as = 'div' }) {
   const reduce = useReducedMotion()
   const M = motion[as] || motion.div
@@ -15,7 +28,7 @@ export function Reveal({ children, delay = 0, y = 24, className, as = 'div' }) {
       className={className}
       initial={{ opacity: 0, y: reduce ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={VIEWPORT}
       transition={{ duration: reduce ? 0 : DUR.med, delay: reduce ? 0 : delay, ease: EASE }}
     >
       {children}
@@ -23,15 +36,15 @@ export function Reveal({ children, delay = 0, y = 24, className, as = 'div' }) {
   )
 }
 
-/* Conteneur qui orchestre l'entree de ses enfants en cascade */
-export function Stagger({ children, className, stagger = 0.09, delay = 0.05, amount = 0.2 }) {
+/* Conteneur qui orchestre ses enfants en cascade, dans les deux sens */
+export function Stagger({ children, className, stagger = 0.09, delay = 0.05, amount = 0.15 }) {
   const reduce = useReducedMotion()
   return (
     <motion.div
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount }}
+      viewport={{ ...VIEWPORT, amount }}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: reduce ? 0 : stagger, delayChildren: reduce ? 0 : delay } },
@@ -60,9 +73,8 @@ export function StaggerItem({ children, className, y = 20 }) {
 
 /*
  * Titre revele mot par mot.
- * Les mots montent en fondu sans masque de decoupe : une police
- * manuscrite a des jambages qui depassent de la ligne et seraient
- * rognes par un overflow: hidden.
+ * Pas de masque de decoupe : une police manuscrite a des jambages qui
+ * depassent de la ligne et seraient rognes par un overflow: hidden.
  */
 export function WordsReveal({ text, className, wordClassName, delay = 0, highlight = [] }) {
   const reduce = useReducedMotion()
@@ -93,7 +105,7 @@ export function WordsReveal({ text, className, wordClassName, delay = 0, highlig
           }}
         >
           {word}
-          {i < words.length - 1 && ' '}
+          {i < words.length - 1 && ' '}
         </motion.span>
       ))}
     </motion.span>
@@ -111,30 +123,5 @@ export function HoverLift({ children, className, lift = -6 }) {
     >
       {children}
     </motion.div>
-  )
-}
-
-/* Compteur qui s'incremente a l'entree dans le viewport */
-export function CountUp({ to, suffix = '', className, duration = 1.6 }) {
-  const reduce = useReducedMotion()
-  if (reduce) return <span className={className}>{to}{suffix}</span>
-  return (
-    <motion.span
-      className={className}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
-      <motion.span
-        initial={{ '--n': 0 }}
-        whileInView={{ '--n': to }}
-        viewport={{ once: true }}
-        transition={{ duration, ease: 'easeOut' }}
-        style={{ '--n': 0 }}
-      >
-        <motion.span>{to}</motion.span>
-      </motion.span>
-      {suffix}
-    </motion.span>
   )
 }

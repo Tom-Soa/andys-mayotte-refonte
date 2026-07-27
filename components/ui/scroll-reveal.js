@@ -20,7 +20,7 @@ export function ScrollReveal({
   transition,
   viewOptions,
   as = 'div',
-  once = true,
+  once = false,
   className,
 }) {
   const ref = useRef(null)
@@ -36,12 +36,16 @@ export function ScrollReveal({
     return <Tag className={className}>{children}</Tag>
   }
 
+  /*
+   * once = false (defaut ici) : l'animation rejoue a chaque entree dans le
+   * viewport et repart en sens inverse a la sortie.
+   */
   return (
     <MotionComponent
       ref={ref}
       className={className}
       initial="hidden"
-      animate={isInView || isViewed ? 'visible' : 'hidden'}
+      animate={isInView || (once && isViewed) ? 'visible' : 'hidden'}
       onAnimationComplete={() => { if (once) setIsViewed(true) }}
       transition={transition}
       variants={variants}

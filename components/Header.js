@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { useCart } from '@/context/CartContext'
 import {
   ShoppingCart, Menu, X, Home, Package,
@@ -23,6 +24,7 @@ export default function Header() {
   const pathname = usePathname()
   const [sheetOpen, setSheetOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [hovered, setHovered] = useState(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -104,24 +106,45 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Navigation desktop : chaque libelle tient sur une seule ligne */}
-          <nav className="hidden md:flex items-center gap-0.5 lg:gap-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative whitespace-nowrap px-2.5 lg:px-3.5 py-2 rounded-sm text-[12.5px] lg:text-[13px] font-medium tracking-wide transition-colors ${
-                  isActive(link.href)
-                    ? 'text-white bg-white/[0.07]'
-                    : 'text-stone-300 hover:text-white hover:bg-white/[0.05]'
-                }`}
-              >
-                {link.label}
-                {isActive(link.href) && (
-                  <span className="absolute left-2.5 right-2.5 lg:left-3.5 lg:right-3.5 -bottom-px h-px bg-primary-400" />
-                )}
-              </Link>
-            ))}
+          {/* Navigation desktop.
+              Principe repris du composant "Animated Navigation Tabs" de
+              21st.dev (@ln-dev7) : un fond et un soulignement partages qui
+              glissent d'un onglet a l'autre via layoutId. */}
+          <nav
+            className="hidden md:flex items-center gap-0.5 lg:gap-1"
+            onMouseLeave={() => setHovered(null)}
+          >
+            {navLinks.map(link => {
+              const active = isActive(link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onMouseEnter={() => setHovered(link.href)}
+                  className={`relative whitespace-nowrap px-2.5 lg:px-3.5 py-2.5 text-[12.5px] lg:text-[13px] font-medium tracking-wide transition-colors duration-200 ${
+                    active ? 'text-white' : 'text-stone-300 hover:text-white'
+                  }`}
+                >
+                  {/* Fond qui suit le survol */}
+                  {hovered === link.href && (
+                    <motion.span
+                      layoutId="nav-hover-bg"
+                      className="absolute inset-0 rounded-sm bg-white/[0.07]"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
+                  {/* Soulignement dore de la page courante */}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-active-underline"
+                      className="absolute left-2.5 right-2.5 lg:left-3.5 lg:right-3.5 -bottom-px h-[2px] rounded-full bg-primary-400"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                </Link>
+              )
+            })}
           </nav>
 
           {/* Actions droite */}

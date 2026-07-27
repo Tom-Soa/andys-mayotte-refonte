@@ -199,7 +199,7 @@ export default async function HomePage() {
                 visible: { opacity: 1, x: 0, scale: 1 },
               }}
               transition={{ duration: 0.9, ease: EASE }}
-              viewOptions={{ once: true, amount: 0.25 }}
+              viewOptions={{ amount: 0.25, margin: '-8% 0px -8% 0px' }}
             >
               <div className="group relative rounded-md overflow-hidden shadow-forest h-[22rem] md:h-[34rem]">
                 <img
@@ -217,7 +217,7 @@ export default async function HomePage() {
                 visible: { opacity: 1, x: 0 },
               }}
               transition={{ duration: 0.9, delay: 0.12, ease: EASE }}
-              viewOptions={{ once: true, amount: 0.25 }}
+              viewOptions={{ amount: 0.25, margin: '-8% 0px -8% 0px' }}
             >
               <span className="section-label on-dark">
                 À propos
