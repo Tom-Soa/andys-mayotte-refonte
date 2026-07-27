@@ -66,11 +66,14 @@ export default async function HomePage() {
     ? (todayHours.open ? `Ouvert · ${fmtHours(todayHours)}` : "Fermé aujourd'hui")
     : 'Lun - Sam · 8h00 - 18h00'
 
-  /* Produits vedettes : base de donnees, sinon catalogue local (products.json) */
+  /* Produits vedettes : base de donnees, sinon catalogue local (products.json).
+     La section "Selection du moment" en montre 4 au maximum, le reste du
+     catalogue est accessible via le bouton "Voir tout le catalogue". */
   const productSource = products.length > 0 ? products : fallbackProducts
+  const availableProducts = productSource.filter(p => p.available)
   const featuredProducts = (() => {
-    const feat = productSource.filter(p => p.available && p.featured)
-    return (feat.length > 0 ? feat : productSource.filter(p => p.available)).slice(0, 8)
+    const feat = availableProducts.filter(p => p.featured)
+    return (feat.length > 0 ? feat : availableProducts).slice(0, 4)
   })()
 
   const steps = [
@@ -88,7 +91,7 @@ export default async function HomePage() {
       <Hero
         statusLabel={todayLabel.replace('Ouvert · ', '')}
         isOpen={!todayHours || todayHours.open}
-        products={featuredProducts}
+        products={availableProducts}
       />
 
       {/* ══════════════════════════════════════════════════════════════
@@ -187,8 +190,26 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════════════════════════════
           À PROPOS - fond forêt
       ══════════════════════════════════════════════════════════════ */}
-      <section id="apropos" className="bg-primary-900 py-24 md:py-36">
-        <div className="max-w-6xl mx-auto px-4">
+      <section id="apropos" className="relative overflow-hidden bg-primary-900 py-24 md:py-36">
+        {/* Texture generee (Higgsfield) : palmes, riz et jute a l'encre d'or.
+            Version portrait sur telephone, paysage sur ordinateur. */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-60 md:hidden"
+            style={{ backgroundImage: "url('/images/site/apropos-texture-mobile.jpg')" }}
+          />
+          <div
+            className="hidden md:block absolute inset-0 bg-cover bg-center opacity-60"
+            style={{ backgroundImage: "url('/images/site/apropos-texture.jpg')" }}
+          />
+          {/* Voile vert : conserve le contraste du texte blanc */}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'radial-gradient(ellipse 75% 65% at 50% 50%, rgba(10,38,24,0.72) 0%, rgba(10,38,24,0.86) 65%, rgba(10,38,24,0.94) 100%)' }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
 
             {/* Image : colonne de gauche sur ordinateur, masquee sur

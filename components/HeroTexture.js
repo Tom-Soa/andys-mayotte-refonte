@@ -1,14 +1,22 @@
 /*
  * Texture d'arriere-plan du hero.
- * Image generee avec Higgsfield (modele nano_banana) : papier creme avec
- * motifs dessines a la main (noix de coco, sacs de jute, palmes, grains de
- * riz), centre volontairement vide pour laisser respirer le titre.
+ * Images generees avec Higgsfield (nano_banana) : papier creme avec motifs
+ * dessines main (noix de coco, sacs de jute, palmes, grains de riz), centre
+ * volontairement vide pour laisser respirer le titre.
+ * Deux versions : paysage sur ordinateur, portrait sur telephone, pour que
+ * le motif reste dense et net sans etre etire.
  */
 export default function HeroTexture() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Telephone : version portrait */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center md:hidden"
+        style={{ backgroundImage: "url('/images/site/hero-texture-mobile.jpg')" }}
+      />
+      {/* Ordinateur : version paysage */}
+      <div
+        className="hidden md:block absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/site/hero-texture.jpg')" }}
       />
       {/* Voile blanc au centre : garantit la lisibilite du titre */}
