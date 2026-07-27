@@ -135,9 +135,11 @@ export default async function HomePage() {
                     {item.icon}
                   </div>
                 </div>
-                <span className="text-primary-500 text-[10px] font-bold tracking-[0.2em] mb-1.5 uppercase">Étape {item.step}</span>
+                <span className="inline-block bg-white text-primary-600 text-[10px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded-sm shadow-sm mb-2">
+                  Étape {item.step}
+                </span>
                 <h3 className="font-serif font-semibold text-primary-800 text-xl mb-2">{item.title}</h3>
-                <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-stone-800 leading-relaxed">{item.desc}</p>
               </StaggerItem>
             ))}
           </Stagger>
@@ -153,9 +155,11 @@ export default async function HomePage() {
                        style={{ '--tw-ring-color': '#F7F2E8', boxShadow: '0 4px 16px rgba(10,38,24,0.24)' }}>
                     {item.icon}
                   </div>
-                  <span className="block text-primary-600 text-[10px] font-bold tracking-[0.22em] uppercase mb-1">Étape {item.step}</span>
+                  <span className="inline-block bg-white text-primary-600 text-[10px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 rounded-sm shadow-sm mb-2">
+                    Étape {item.step}
+                  </span>
                   <h3 className="font-serif font-semibold text-primary-800 text-[1.35rem] leading-tight mb-1.5">{item.title}</h3>
-                  <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                  <p className="text-sm text-stone-800 leading-relaxed">{item.desc}</p>
                 </StaggerItem>
               ))}
             </div>
