@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { faqItems, faqJsonLd } from '@/data/faq'
 import { ArrowRight, MessageCircle } from 'lucide-react'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Primitives'
 
 export const metadata = {
   title: 'FAQ, questions fréquentes',
@@ -36,20 +37,22 @@ export default function FaqPage() {
 
       {/* Questions */}
       <div className="max-w-3xl mx-auto px-4 py-14 md:py-20">
-        <div className="space-y-3">
+        <Stagger className="space-y-3" stagger={0.06}>
           {faqItems.map((item, i) => (
-            <details key={i} className="group bg-stone-50/60 border border-stone-200 rounded-md px-5 py-4 transition-colors hover:border-primary-200">
-              <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-serif font-semibold text-primary-800 text-base md:text-lg">
-                <span>{item.q}</span>
-                <span className="text-primary-500 transition-transform group-open:rotate-45 select-none mt-1" aria-hidden>+</span>
-              </summary>
-              <p className="mt-3 text-stone-600 text-sm md:text-base leading-relaxed">{item.a}</p>
-            </details>
+            <StaggerItem key={i} y={16}>
+              <details className="group bg-stone-50/60 border border-stone-200 rounded-md px-5 py-4 transition-colors hover:border-primary-300">
+                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-serif font-semibold text-primary-800 text-base md:text-lg">
+                  <span>{item.q}</span>
+                  <span className="text-primary-500 transition-transform duration-300 group-open:rotate-45 select-none mt-1" aria-hidden>+</span>
+                </summary>
+                <p className="mt-3 text-stone-600 text-sm md:text-base leading-relaxed">{item.a}</p>
+              </details>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
         {/* Une autre question ? */}
-        <div className="mt-14 rounded-md border border-stone-200 bg-stone-50/60 p-7 md:p-9 text-center">
+        <Reveal className="mt-14 rounded-md border border-stone-200 bg-stone-50/60 p-7 md:p-9 text-center">
           <MessageCircle size={22} className="mx-auto text-primary-500 mb-3" />
           <h2 className="font-serif font-semibold text-primary-800 text-xl md:text-2xl mb-2">
             Vous ne trouvez pas votre réponse ?
@@ -73,7 +76,7 @@ export default function FaqPage() {
               WhatsApp
             </a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   )

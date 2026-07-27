@@ -145,6 +145,19 @@ export default function Footer() {
               SIREN&nbsp;938&nbsp;321&nbsp;536
             </p>
           </div>
+
+          {/* Signature Fondation Studio */}
+          <p className="mt-4 text-center text-stone-600" style={{ fontSize: '10px' }}>
+            Créé par{' '}
+            <a
+              href="https://fondationstudio.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-500/90 hover:text-primary-400 font-medium transition-colors"
+            >
+              FondationStudio.fr
+            </a>
+          </p>
         </div>
         <Link
           href="/admin"

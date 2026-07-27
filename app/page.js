@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { sql } from '@/lib/db'
 import ProductCard from '@/components/ProductCard'
 import ReviewForm from '@/components/ReviewForm'
-import HeroMedia from '@/components/HeroMedia'
+import Hero from '@/components/Hero'
+import { Reveal, Stagger, StaggerItem, HoverLift } from '@/components/motion/Primitives'
 import fallbackProducts from '@/data/products.json'
 import { faqItems, faqJsonLd } from '@/data/faq'
 import {
@@ -83,90 +84,33 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-white overflow-hidden">
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 pt-14 pb-16 md:pt-24 md:pb-24 w-full">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-
-            {/* Texte principal */}
-            <div className="flex-1 text-center md:text-left">
-
-              {/* Localisation, ligne discrete */}
-              <p className="anim-fade-in inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-primary-600 mb-6">
-                <MapPin size={11} strokeWidth={2.5} />
-                Poroani · Mayotte
-              </p>
-
-              {/* Titre principal, police signature du logo */}
-              <h1
-                className="anim-fade-up font-script text-primary-800 leading-[1.02] mb-6"
-                style={{ fontSize: 'clamp(2.6rem, 7vw, 5rem)', fontWeight: 700 }}
-              >
-                Votre grossiste alimentaire
-              </h1>
-
-              <p className="anim-fade-up-1 text-stone-500 text-base md:text-lg leading-relaxed mb-9 max-w-md mx-auto md:mx-0">
-                Commandez en ligne, choisissez votre créneau de retrait.
-                Récupérez à Poroani et payez sur place.
-              </p>
-
-              <div className="anim-fade-up-2 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                <Link href="/produits" className="btn-primary group">
-                  <ShoppingBag size={16} className="shrink-0" />
-                  Voir le catalogue
-                  <ArrowRight size={15} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link href="/reservation" className="btn-outline group">
-                  <CalendarCheck size={16} className="shrink-0" />
-                  Réserver un créneau
-                </Link>
-              </div>
-            </div>
-
-            {/* Photo + statut du magasin, sans cadres superposes */}
-            <div className="anim-fade-up-3 w-full md:w-[46%] shrink-0">
-              <div className="relative overflow-hidden rounded-md" style={{ aspectRatio: '4/3' }}>
-                <img
-                  src="/images/site/hero.jpg"
-                  alt="L'entrepôt Chez Andy's à Poroani"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              {/* Statut du jour, ligne sobre sous la photo */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4 text-sm">
-                <span className="inline-flex items-center gap-2 font-semibold text-primary-800">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  {todayHours && !todayHours.open ? "Fermé aujourd'hui" : "Ouvert aujourd'hui"}
-                </span>
-                <span className="text-stone-500">{todayLabel.replace('Ouvert · ', '')}</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      <Hero
+        statusLabel={todayLabel.replace('Ouvert · ', '')}
+        isOpen={!todayHours || todayHours.open}
+        products={featuredProducts}
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           COMMENT ÇA MARCHE
       ══════════════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-32" style={{ background: '#F7F2E8' }}>
         <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-14 md:mb-18">
+          <Reveal className="text-center mb-14 md:mb-18">
             <span className="section-label center">Simple & rapide</span>
             <h2 className="font-serif font-semibold text-primary-800 leading-tight"
                 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Comment ça marche
             </h2>
-          </div>
+          </Reveal>
 
           {/* Desktop : timeline horizontale (ronds relies, design valide) */}
-          <div className="hidden sm:grid sm:grid-cols-4 gap-0 relative">
+          <Stagger className="hidden sm:grid sm:grid-cols-4 gap-0 relative" stagger={0.13}>
             <div className="hidden lg:block absolute top-11 left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] h-px z-0"
                  style={{ background: 'linear-gradient(90deg, rgba(201,161,74,0.3), rgba(201,161,74,0.6), rgba(201,161,74,0.3))' }} />
-            {steps.map((item, idx) => (
-              <div key={item.step} className={`reveal delay-${idx + 1} group relative z-10 flex flex-col items-center text-center px-4`}>
+            {steps.map(item => (
+              <StaggerItem key={item.step} className="group relative z-10 flex flex-col items-center text-center px-4">
                 <div className="relative mb-5">
-                  <div className="relative z-10 w-[4.5rem] h-[4.5rem] rounded-full bg-primary-900 text-primary-400 flex items-center justify-center ring-4 transition-transform duration-300 group-hover:-translate-y-1"
+                  <div className="relative z-10 w-[4.5rem] h-[4.5rem] rounded-full bg-primary-900 text-primary-400 flex items-center justify-center ring-4 transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:text-primary-300"
                        style={{ '--tw-ring-color': '#F7F2E8', boxShadow: '0 6px 24px rgba(10,38,24,0.28)' }}>
                     {item.icon}
                   </div>
@@ -174,28 +118,28 @@ export default async function HomePage() {
                 <span className="text-primary-500 text-[10px] font-bold tracking-[0.2em] mb-1.5 uppercase">Étape {item.step}</span>
                 <h3 className="font-serif font-semibold text-primary-800 text-xl mb-2">{item.title}</h3>
                 <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
-          {/* Mobile : timeline verticale sobre, sans cartes */}
-          <div className="sm:hidden relative pl-12">
-            <div className="absolute left-[1.35rem] top-2 bottom-2 w-px"
-                 style={{ background: 'linear-gradient(180deg, rgba(201,161,74,0.5), rgba(201,161,74,0.15))' }} />
-            <div className="space-y-8">
-              {steps.map((item, idx) => (
-                <div key={item.step} className={`reveal delay-${idx + 1} relative`}>
-                  <div className="absolute -left-12 top-0 w-11 h-11 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center"
-                       style={{ boxShadow: '0 4px 14px rgba(10,38,24,0.22)' }}>
+          {/* Mobile : timeline verticale, plus aeree */}
+          <Stagger className="sm:hidden relative pl-[4.25rem]" stagger={0.12}>
+            <div className="absolute left-[1.6rem] top-3 bottom-3 w-px"
+                 style={{ background: 'linear-gradient(180deg, rgba(201,161,74,0.5), rgba(201,161,74,0.12))' }} />
+            <div className="space-y-11">
+              {steps.map(item => (
+                <StaggerItem key={item.step} className="relative">
+                  <div className="absolute -left-[4.25rem] top-0 w-[3.25rem] h-[3.25rem] rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center"
+                       style={{ boxShadow: '0 4px 16px rgba(10,38,24,0.24)' }}>
                     {item.icon}
                   </div>
-                  <span className="block text-primary-600 text-[10px] font-bold tracking-[0.22em] uppercase mb-0.5">Étape {item.step}</span>
-                  <h3 className="font-serif font-semibold text-primary-800 text-xl leading-tight mb-1">{item.title}</h3>
-                  <p className="text-[13px] text-stone-500 leading-relaxed">{item.desc}</p>
-                </div>
+                  <span className="block text-primary-600 text-[10px] font-bold tracking-[0.22em] uppercase mb-1">Étape {item.step}</span>
+                  <h3 className="font-serif font-semibold text-primary-800 text-[1.35rem] leading-tight mb-1.5">{item.title}</h3>
+                  <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                </StaggerItem>
               ))}
             </div>
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -204,34 +148,31 @@ export default async function HomePage() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="bg-white py-20 md:py-28 border-t border-stone-100">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="reveal text-center mb-10 md:mb-14">
+          <Reveal className="text-center mb-10 md:mb-14">
             <span className="section-label">Sélection du moment</span>
             <h2 className="font-serif font-semibold text-primary-800 leading-tight"
                 style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)' }}>
               Nos produits
             </h2>
-          </div>
+          </Reveal>
 
           {featuredProducts.length > 0 ? (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch">
-                {featuredProducts.map((product, i) => (
-                  <div key={product.id} className={`reveal delay-${Math.min(i + 1, 5)} h-full`}>
+              <Stagger className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch" stagger={0.07} amount={0.05}>
+                {featuredProducts.map(product => (
+                  <StaggerItem key={product.id} className="h-full" y={26}>
                     <ProductCard product={product} />
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </Stagger>
 
               {/* Bouton vers le catalogue complet, sous la grille */}
-              <div className="reveal text-center mt-10 md:mt-14">
-                <Link
-                  href="/produits"
-                  className="inline-flex items-center justify-center gap-2 bg-primary-900 hover:bg-forest-800 active:scale-95 text-white font-semibold px-8 py-4 rounded-md text-sm transition-all shadow-forest hover:-translate-y-0.5 group"
-                >
+              <Reveal className="text-center mt-10 md:mt-14" delay={0.1}>
+                <Link href="/produits" className="btn-dark group">
                   Voir tout le catalogue
-                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={15} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
-              </div>
+              </Reveal>
             </>
           ) : (
             <div className="text-center py-16 text-stone-400">
@@ -250,18 +191,18 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
 
             {/* Image, plus haute pour equilibrer le texte */}
-            <div className="reveal-left relative">
-              <div className="relative rounded-md overflow-hidden shadow-forest h-[22rem] md:h-[34rem]">
+            <Reveal className="relative" y={34}>
+              <div className="group relative rounded-md overflow-hidden shadow-forest h-[22rem] md:h-[34rem]">
                 <img
                   src="/images/site/apropos.jpg"
                   alt="Entrepôt Chez Andy's"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                 />
               </div>
-            </div>
+            </Reveal>
 
             {/* Texte */}
-            <div className="reveal-right">
+            <Reveal delay={0.15} y={28}>
               <span className="section-label on-dark">
                 À propos
               </span>
@@ -297,7 +238,7 @@ export default async function HomePage() {
                 Découvrir Chez Andy&apos;s
                 <ArrowRight size={15} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -308,17 +249,21 @@ export default async function HomePage() {
       {reviews.length > 0 && (
         <section className="py-20 md:py-28 border-t border-stone-100" style={{background: '#F7F2E8'}}>
           <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-12">
+            <Reveal className="text-center mb-12">
               <span className="section-label center">Ils nous font confiance</span>
               <h2 className="font-serif font-semibold text-primary-800" style={{fontSize:'clamp(2rem,5vw,3.25rem)'}}>
                 Avis clients
               </h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            </Reveal>
+            <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.09}>
               {reviews.map(review => (
-                <ReviewCard key={review.id} review={review} />
+                <StaggerItem key={review.id} className="h-full">
+                  <HoverLift className="h-full" lift={-5}>
+                    <ReviewCard review={review} />
+                  </HoverLift>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
             <ReviewForm />
           </div>
         </section>
@@ -329,36 +274,35 @@ export default async function HomePage() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-28 bg-white border-t border-stone-100">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <Reveal className="text-center mb-12">
             <span className="section-label center">Questions fréquentes</span>
             <h2 className="font-serif font-semibold text-primary-800" style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.75rem)' }}>
               Tout savoir avant de commander
             </h2>
-          </div>
-          <div className="space-y-3">
+          </Reveal>
+          <Stagger className="space-y-3" stagger={0.08}>
             {faqItems.slice(0, 4).map((item, i) => (
-              <details key={i} className="group bg-stone-50/60 border border-stone-200 rounded-md px-5 py-4 transition-colors hover:border-primary-200">
-                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-serif font-semibold text-primary-800 text-base md:text-lg">
-                  <span>{item.q}</span>
-                  <span className="text-primary-500 transition-transform group-open:rotate-45 select-none mt-1" aria-hidden>+</span>
-                </summary>
-                <p className="mt-3 text-stone-600 text-sm md:text-base leading-relaxed">
-                  {item.a}
-                </p>
-              </details>
+              <StaggerItem key={i} y={16}>
+                <details className="group bg-stone-50/60 border border-stone-200 rounded-md px-5 py-4 transition-colors hover:border-primary-300">
+                  <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-serif font-semibold text-primary-800 text-base md:text-lg">
+                    <span>{item.q}</span>
+                    <span className="text-primary-500 transition-transform duration-300 group-open:rotate-45 select-none mt-1" aria-hidden>+</span>
+                  </summary>
+                  <p className="mt-3 text-stone-600 text-sm md:text-base leading-relaxed">
+                    {item.a}
+                  </p>
+                </details>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {/* Vers la FAQ complete */}
-          <div className="reveal text-center mt-10">
-            <Link
-              href="/faq"
-              className="btn-outline group"
-            >
+          <Reveal className="text-center mt-10" delay={0.1}>
+            <Link href="/faq" className="btn-outline group">
               Voir la FAQ
-              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight size={15} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-          </div>
+          </Reveal>
         </div>
 
         {/* FAQ JSON-LD (les 4 questions visibles sur cette page) */}
@@ -384,18 +328,22 @@ export default async function HomePage() {
              style={{ background: 'linear-gradient(90deg, transparent, rgba(201,161,74,0.25), transparent)' }} />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-          <span className="section-label center">Prêt à commander ?</span>
-          <h2
-            className="reveal font-serif font-semibold text-primary-800 mb-6 leading-tight"
-            style={{ fontSize: 'clamp(2.2rem, 6vw, 4.5rem)' }}
-          >
-            Passez votre<br />commande en ligne
-          </h2>
-          <p className="reveal delay-1 text-stone-600 text-sm md:text-base mb-11 max-w-md mx-auto leading-relaxed">
-            Ajoutez vos produits, réservez un créneau, venez récupérer et payez sur place.
-          </p>
+          <Reveal>
+            <span className="section-label center">Prêt à commander ?</span>
+            <h2
+              className="font-serif font-semibold text-primary-800 mb-6 leading-tight"
+              style={{ fontSize: 'clamp(2.2rem, 6vw, 4.5rem)' }}
+            >
+              Passez votre<br />commande en ligne
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="text-stone-600 text-sm md:text-base mb-11 max-w-md mx-auto leading-relaxed">
+              Ajoutez vos produits, réservez un créneau, venez récupérer et payez sur place.
+            </p>
+          </Reveal>
           {/* Action principale, puis lien secondaire vers le contact */}
-          <div className="reveal delay-2 flex flex-col items-center gap-6">
+          <Reveal delay={0.22} className="flex flex-col items-center gap-6">
             <Link href="/produits" className="btn-dark group">
               <ShoppingBag size={16} className="shrink-0" />
               Voir les produits
@@ -410,7 +358,7 @@ export default async function HomePage() {
               Nous contacter
               <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

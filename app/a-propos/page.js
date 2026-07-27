@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, Package, CalendarCheck, Store, Users } from 'lucide-react'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Primitives'
 
 export const metadata = {
   title: "À propos, votre grossiste alimentaire à Poroani",
@@ -45,14 +46,14 @@ export default function AProposPage() {
 
       {/* Chiffres cles */}
       <div className="border-b border-stone-100" style={{ background: '#F7F2E8' }}>
-        <div className="max-w-5xl mx-auto px-4 py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <Stagger className="max-w-5xl mx-auto px-4 py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-8" stagger={0.1}>
           {chiffres.map(c => (
-            <div key={c.label} className="text-center md:text-left">
+            <StaggerItem key={c.label} className="text-center md:text-left">
               <p className="font-serif font-bold text-primary-800 leading-none" style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}>{c.valeur}</p>
               <p className="text-stone-500 text-xs md:text-sm mt-1.5">{c.label}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
 
       {/* Histoire */}
@@ -97,19 +98,21 @@ export default function AProposPage() {
               Ce qui ne change jamais
             </h2>
           </div>
-          <div>
+          <Stagger stagger={0.1}>
             {engagements.map((e, i) => (
-              <div key={e.titre} className={`flex items-start gap-5 py-6 ${i > 0 ? 'border-t border-primary-800/10' : ''}`}>
-                <span className="w-11 h-11 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center shrink-0">
-                  {e.icon}
-                </span>
-                <div>
-                  <h3 className="font-serif font-semibold text-primary-800 text-lg md:text-xl mb-1">{e.titre}</h3>
-                  <p className="text-stone-500 text-sm leading-relaxed">{e.texte}</p>
+              <StaggerItem key={e.titre}>
+                <div className={`group flex items-start gap-5 py-6 ${i > 0 ? 'border-t border-primary-800/10' : ''}`}>
+                  <span className="w-11 h-11 rounded-sm bg-primary-900 text-primary-400 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:-translate-y-1">
+                    {e.icon}
+                  </span>
+                  <div>
+                    <h3 className="font-serif font-semibold text-primary-800 text-lg md:text-xl mb-1">{e.titre}</h3>
+                    <p className="text-stone-500 text-sm leading-relaxed">{e.texte}</p>
+                  </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </div>
 
